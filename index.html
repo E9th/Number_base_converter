@@ -149,7 +149,7 @@
         console.log('Mnemonic:', mnemonic);
         console.log('Immediate Data:', immediateDataInt);
 
-        // Split immediate data if it exceeds 8 bits
+        // Split immediate data if it exceeds 8 bits (1 byte)
         if (immediateDataInt > 0xFF) {
             const part1 = ((immediateDataInt >> 8) & 0xFF).toString(16).toUpperCase().padStart(2, '0');
             const part2 = (immediateDataInt & 0xFF).toString(16).toUpperCase().padStart(2, '0');
@@ -193,7 +193,6 @@ Operands        : ${opcodeTable[key].operands}
 
     document.getElementById("opcodeResult").innerText = `${details}\n${result}`;
 }
-
 
     </script>
 </head>
