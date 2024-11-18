@@ -97,7 +97,17 @@
                     result = "Invalid Operation";
             }
 
-            document.getElementById("calcResult").innerText = result;
+            let resultValues = {
+                binary: result.toString(2),
+                octal: result.toString(8),
+                decimal: result.toString(10),
+                hexadecimal: result.toString(16).toUpperCase()
+            };
+
+            document.getElementById("calcResultBinary").innerText = resultValues.binary;
+            document.getElementById("calcResultOctal").innerText = resultValues.octal;
+            document.getElementById("calcResultDecimal").innerText = resultValues.decimal;
+            document.getElementById("calcResultHexadecimal").innerText = resultValues.hexadecimal;
         }
     </script>
 </head>
@@ -155,7 +165,10 @@
                 </div>
                 <div class="result-group mt-3">
                     <h5>Calculation Result:</h5>
-                    <p>Result: <span id="calcResult"></span></p>
+                    <p><span class="result-label">Binary:</span> <span id="calcResultBinary"></span></p>
+                    <p><span class="result-label">Octal:</span> <span id="calcResultOctal"></span></p>
+                    <p><span class="result-label">Decimal:</span> <span id="calcResultDecimal"></span></p>
+                    <p><span class="result-label">Hexadecimal:</span> <span id="calcResultHexadecimal"></span></p>
                 </div>
             </div>
         </div>
