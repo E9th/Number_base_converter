@@ -147,7 +147,7 @@
                     if (opcodeTable[key].mnemonic.trim() === mnemonic && opcodeTable[key].operands.startsWith(operand1)) {
                         if (immediateData !== null) {
                             // Handle case where there is immediate data
-                            const numberOfBytes = opcodeTable[key].number_of_bytes;
+                            const numberOfBytes = immediateData > 0xFF ? 2 : 1;
                             const immediateDataHex = immediateData.toString(16).toUpperCase().padStart(2, '0');
                             // If immediate data is larger than 8 bits, split it
                             if (immediateData > 0xFF) {
@@ -155,7 +155,7 @@
                                 const part2 = immediateData & 0xFF;
                                 result = `result = ${inputStr} = ${key}${part1.toString(16).toUpperCase().padStart(2, '0')} ${key}${part2.toString(16).toUpperCase().padStart(2, '0')}`;
                                 details = `Hex Code : ${key}
-Number of Bytes : 4 (2 + 2)
+Number of Bytes : ${numberOfBytes * 2} (2 + 2)
 Mnemonic : ${opcodeTable[key].mnemonic}
 Operands : ${opcodeTable[key].operands}`;
                             } else {
