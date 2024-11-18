@@ -144,9 +144,10 @@
             if (match) {
                 const mnemonic = match[1].trim(); // เช่น "ADD A"
                 const immediateData = match[2]; // เช่น "38"
-                const immediateDataInt = parseInt(immediateData, 16); // แปลงเป็นเลขฐานสิบ
+                console.log('Mnemonic:', mnemonic);
+                console.log('Immediate Data:', immediateData);
 
-                // ค้นหา opcode ที่ตรงกันในตาราง
+                // ตรวจสอบใน opcodeTable
                 for (let key in opcodeTable) {
                     if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
                         const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
@@ -221,10 +222,10 @@ Operands        : ${opcodeTable[key].operands}
                 <div class="d-grid gap-2">
                     <button onclick="calculate('add')" class="btn btn-primary">Add</button>
                     <button onclick="calculate('subtract')" class="btn btn-primary">Subtract</button>
-               
                 </div>
+                
                 <div class="result-group mt-3">
-                    <h5>Calculation Result:</h5>
+                                        <h5>Calculation Result:</h5>
                     <p><span class="result-label">Binary:</span> <span id="calcResultBinary"></span></p>
                     <p><span class="result-label">Octal:</span> <span id="calcResultOctal"></span></p>
                     <p><span class="result-label">Decimal:</span> <span id="calcResultDecimal"></span></p>
@@ -250,3 +251,4 @@ Operands        : ${opcodeTable[key].operands}
     </div>
 </body>
 </html>
+
