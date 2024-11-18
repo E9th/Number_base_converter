@@ -38,7 +38,7 @@
             border-radius: 8px;
             font-weight: 600;
             color: #2c3e50;
-            white-space: pre-wrap; /* Preserve formatting */
+            white-space: pre-wrap;
         }
 
         .btn-primary {
@@ -81,52 +81,6 @@
             }
         });
 
-        function convertNumber() {
-            const number = document.getElementById("number").value;
-            const base = parseInt(document.getElementById("base").value);
-            
-            let convertedValues = {
-                binary: parseInt(number, base).toString(2),
-                octal: parseInt(number, base).toString(8),
-                decimal: parseInt(number, base).toString(10),
-                hexadecimal: parseInt(number, base).toString(16).toUpperCase()
-            };
-
-            document.getElementById("resultBinary").innerText = convertedValues.binary;
-            document.getElementById("resultOctal").innerText = convertedValues.octal;
-            document.getElementById("resultDecimal").innerText = convertedValues.decimal;
-            document.getElementById("resultHexadecimal").innerText = convertedValues.hexadecimal;
-        }
-
-        function calculate(operation) {
-            const number1 = parseInt(document.getElementById("number1").value, parseInt(document.getElementById("base1").value));
-            const number2 = parseInt(document.getElementById("number2").value, parseInt(document.getElementById("base2").value));
-            let result;
-
-            switch (operation) {
-                case 'add':
-                    result = number1 + number2;
-                    break;
-                case 'subtract':
-                    result = number1 - number2;
-                    break;
-                default:
-                    result = "Invalid Operation";
-            }
-
-            let resultValues = {
-                binary: result.toString(2),
-                octal: result.toString(8),
-                decimal: result.toString(10),
-                hexadecimal: result.toString(16).toUpperCase()
-            };
-
-            document.getElementById("calcResultBinary").innerText = resultValues.binary;
-            document.getElementById("calcResultOctal").innerText = resultValues.octal;
-            document.getElementById("calcResultDecimal").innerText = resultValues.decimal;
-            document.getElementById("calcResultHexadecimal").innerText = resultValues.hexadecimal;
-        }
-
         function getNumberOfBytes(operands) {
             if (operands.includes("#data")) {
                 return 2; // คำสั่งที่มี immediate data ใช้ 2 byte
@@ -135,107 +89,44 @@
         }
 
         function searchOpcode() {
-    const input = document.getElementById("opcodeInput").value.trim().toUpperCase();
-    let result = "";
-    let details = "";
+            const input = document.getElementById("opcodeInput").value.trim().toUpperCase();
+            let result = "";
+            let details = "";
 
-    // ตรวจสอบรูปแบบการป้อนข้อมูล เช่น ADD A#38
-    const match = input.match(/(\w+\s+\w+)#(\w+)/);
-    if (match) {
-        const mnemonic = match[1].trim(); // เช่น "ADD A"
-        const immediateData = match[2]; // เช่น "38"
-        console.log('Mnemonic:', mnemonic);
-        console.log('Immediate Data:', immediateData);
+            // ปรับการตรวจสอบเพื่อรองรับ ADD A#data
+            const match = input.match(/(\w+)\s+A#(\w+)/);
+            if (match) {
+                const mnemonic = match[1].trim(); // เช่น "ADD"
+                const immediateData = match[2]; // เช่น "38"
+                console.log('Mnemonic:', mnemonic);
+                console.log('Immediate Data:', immediateData);
 
-        // ตรวจสอบใน opcodeTable
-        for (let key in opcodeTable) {
-            console.log('Comparing with opcode mnemonic:', opcodeTable[key].mnemonic);
-            if (opcodeTable[key].mnemonic.trim() === mnemonic && opcodeTable[key].operands.includes("#data")) {
-                const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
-                result = `result = ${input} = ${key}${immediateData}`;
-                details = `
+                // ค้นหาใน opcodeTable โดยไม่รวม "A" ใน mnemonic
+                for (let key in opcodeTable) {
+                    if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
+                        const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
+                        result = `result = ${input} = ${key}${immediateData}`;
+                        details = `
 Hex Code        : ${key}
 Number of Bytes : ${numberOfBytes}
 Mnemonic        : ${opcodeTable[key].mnemonic}
 Operands        : ${opcodeTable[key].operands}
-                `;
-                break;
+                        `;
+                        break;
+                    }
+                }
             }
+
+            if (!result) {
+                result = "No match found";
+            }
+
+            document.getElementById("opcodeResult").innerText = `${details}\n${result}`;
         }
-    }
-
-    if (!result) {
-        result = "No match found";
-    }
-
-    document.getElementById("opcodeResult").innerText = `${details}\n${result}`;
-}
-
     </script>
 </head>
 <body>
     <div class="container">
-        <div class="card">
-            <div class="card-header">Number Base Converter</div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label for="number" class="form-label">Enter a number and select its base to convert:</label>
-                    <input type="text" id="number" class="form-control" placeholder="Enter number">
-                    <select id="base" class="form-select mt-2">
-                        <option value="2">Binary</option>
-                        <option value="8">Octal</option>
-                        <option value="10">Decimal</option>
-                        <option value="16">Hexadecimal</option>
-                    </select>
-                </div>
-                <button onclick="convertNumber()" class="btn btn-primary w-100">Convert</button>
-                <div class="result-group mt-3">
-                    <h5>Converted Values:</h5>
-                    <p><span class="result-label">Binary:</span> <span id="resultBinary"></span></p>
-                    <p><span class="result-label">Octal:</span> <span id="resultOctal"></span></p>
-                    <p><span class="result-label">Decimal:</span> <span id="resultDecimal"></span></p>
-                    <p><span class="result-label">Hexadecimal:</span> <span id="resultHexadecimal"></span></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">Number Base Calculator</div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label for="number1" class="form-label">Enter two numbers and select their bases to calculate:</label>
-                    <input type="text" id="number1" class="form-control" placeholder="Enter first number">
-                    <select id="base1" class="form-select mt-2">
-                        <option value="2">Binary</option>
-                        <option value="8">Octal</option>
-                        <option value="10">Decimal</option>
-                        <option value="16">Hexadecimal</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <input type="text" id="number2" class="form-control" placeholder="Enter second number">
-                    <select id="base2" class="form-select mt-2">
-                        <option value="2">Binary</option>
-                        <option value="8">Octal</option>
-                        <option value="10">Decimal</option>
-                        <option value="16">Hexadecimal</option>
-                    </select>
-                </div>
-                <div class="d-grid gap-2">
-                    <button onclick="calculate('add')" class="btn btn-primary">Add</button>
-                    <button onclick="calculate('subtract')" class="btn btn-primary">Subtract</button>
-                </div>
-                
-                <div class="result-group mt-3">
-                                        <h5>Calculation Result:</h5>
-                    <p><span class="result-label">Binary:</span> <span id="calcResultBinary"></span></p>
-                    <p><span class="result-label">Octal:</span> <span id="calcResultOctal"></span></p>
-                    <p><span class="result-label">Decimal:</span> <span id="calcResultDecimal"></span></p>
-                    <p><span class="result-label">Hexadecimal:</span> <span id="calcResultHexadecimal"></span></p>
-                </div>
-            </div>
-        </div>
-
         <div class="card">
             <div class="card-header">Opcode Converter</div>
             <div class="card-body">
@@ -253,4 +144,3 @@ Operands        : ${opcodeTable[key].operands}
     </div>
 </body>
 </html>
-
