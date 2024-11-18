@@ -46,9 +46,20 @@
             padding: 15px;
             background-color: #e9f5fc;
             border-radius: 8px;
-            text-align: center;
+            text-align: left;
             font-weight: 600;
             color: #2c3e50;
+        }
+
+        .result-group p {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .result-label {
+            min-width: 120px;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -58,16 +69,16 @@
             const base = parseInt(document.getElementById("base").value);
             
             let convertedValues = {
-                base2: parseInt(number, base).toString(2),
-                base8: parseInt(number, base).toString(8),
-                base10: parseInt(number, base).toString(10),
-                base16: parseInt(number, base).toString(16).toUpperCase()
+                binary: parseInt(number, base).toString(2),
+                octal: parseInt(number, base).toString(8),
+                decimal: parseInt(number, base).toString(10),
+                hexadecimal: parseInt(number, base).toString(16).toUpperCase()
             };
 
-            document.getElementById("resultBase2").innerText = convertedValues.base2;
-            document.getElementById("resultBase8").innerText = convertedValues.base8;
-            document.getElementById("resultBase10").innerText = convertedValues.base10;
-            document.getElementById("resultBase16").innerText = convertedValues.base16;
+            document.getElementById("resultBinary").innerText = convertedValues.binary;
+            document.getElementById("resultOctal").innerText = convertedValues.octal;
+            document.getElementById("resultDecimal").innerText = convertedValues.decimal;
+            document.getElementById("resultHexadecimal").innerText = convertedValues.hexadecimal;
         }
 
         function calculate(operation) {
@@ -99,19 +110,19 @@
                     <label for="number" class="form-label">Enter a number and select its base to convert:</label>
                     <input type="text" id="number" class="form-control" placeholder="Enter number">
                     <select id="base" class="form-select mt-2">
-                        <option value="2">Base 2</option>
-                        <option value="8">Base 8</option>
-                        <option value="10">Base 10</option>
-                        <option value="16">Base 16</option>
+                        <option value="2">Binary</option>
+                        <option value="8">Octal</option>
+                        <option value="10">Decimal</option>
+                        <option value="16">Hexadecimal</option>
                     </select>
                 </div>
                 <button onclick="convertNumber()" class="btn btn-primary w-100">Convert</button>
                 <div class="result-group mt-3">
                     <h5>Converted Values:</h5>
-                    <p>Base 2: <span id="resultBase2"></span></p>
-                    <p>Base 8: <span id="resultBase8"></span></p>
-                    <p>Base 10: <span id="resultBase10"></span></p>
-                    <p>Base 16: <span id="resultBase16"></span></p>
+                    <p><span class="result-label">Binary:</span> <span id="resultBinary"></span></p>
+                    <p><span class="result-label">Octal:</span> <span id="resultOctal"></span></p>
+                    <p><span class="result-label">Decimal:</span> <span id="resultDecimal"></span></p>
+                    <p><span class="result-label">Hexadecimal:</span> <span id="resultHexadecimal"></span></p>
                 </div>
             </div>
         </div>
@@ -123,19 +134,19 @@
                     <label for="number1" class="form-label">Enter two numbers and select their bases to calculate:</label>
                     <input type="text" id="number1" class="form-control" placeholder="Enter first number">
                     <select id="base1" class="form-select mt-2">
-                        <option value="2">Base 2</option>
-                        <option value="8">Base 8</option>
-                        <option value="10">Base 10</option>
-                        <option value="16">Base 16</option>
+                        <option value="2">Binary</option>
+                        <option value="8">Octal</option>
+                        <option value="10">Decimal</option>
+                        <option value="16">Hexadecimal</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <input type="text" id="number2" class="form-control" placeholder="Enter second number">
                     <select id="base2" class="form-select mt-2">
-                        <option value="2">Base 2</option>
-                        <option value="8">Base 8</option>
-                        <option value="10">Base 10</option>
-                        <option value="16">Base 16</option>
+                        <option value="2">Binary</option>
+                        <option value="8">Octal</option>
+                        <option value="10">Decimal</option>
+                        <option value="16">Hexadecimal</option>
                     </select>
                 </div>
                 <div class="d-grid gap-2">
