@@ -70,7 +70,10 @@
 
         document.addEventListener('DOMContentLoaded', async function () {
             try {
-                const response = await fetch('opcodeTable.json'); // ระบุ path ให้ตรงกับตำแหน่งไฟล์ในโฟลเดอร์
+                const response = await fetch('https://E9th.github.io/Number_base_converter/opcodeTable.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
                 opcodeTable = await response.json();
                 console.log('Opcode table loaded successfully:', opcodeTable);
             } catch (error) {
@@ -218,6 +221,7 @@ Operands        : ${opcodeTable[key].operands}
                 <div class="d-grid gap-2">
                     <button onclick="calculate('add')" class="btn btn-primary">Add</button>
                     <button onclick="calculate('subtract')" class="btn btn-primary">Subtract</button>
+               
                 </div>
                 <div class="result-group mt-3">
                     <h5>Calculation Result:</h5>
