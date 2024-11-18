@@ -159,7 +159,8 @@ Number of Bytes : 4 (2 + 2)
 Mnemonic : ${opcodeTable[key].mnemonic}
 Operands : ${opcodeTable[key].operands}`;
                             } else {
-                                result = `result = ${inputStr} = ${key}${immediateDataHex}`;
+                                const formattedImmediateData = immediateDataHex.padStart(4, '0'); // Pad with 0 to ensure it's 8-bit
+                                result = `result = ${inputStr} = ${key}${formattedImmediateData}`;
                                 details = `Hex Code : ${key}
 Number of Bytes : ${numberOfBytes}
 Mnemonic : ${opcodeTable[key].mnemonic}
@@ -184,6 +185,14 @@ Operands : ${opcodeTable[key].operands}`;
 
             document.getElementById("opcodeResult").innerText = `${details}\n${result}`;
         }
+
+        // Disable right-click and certain key combinations
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === 'I') || (event.ctrlKey && event.key === 'U')) {
+                event.preventDefault();
+            }
+        });
     </script>
 </head>
 <body>
