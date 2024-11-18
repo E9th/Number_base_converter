@@ -64,6 +64,22 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
+    </script>
+    <script>
+        const opcodeTable = {
+            "00": { mnemonic: "NOP", operands: "" },
+            "01": { mnemonic: "AJMP", operands: "code addr" },
+            "02": { mnemonic: "LJMP", operands: "code addr" },
+            "03": { mnemonic: "RR", operands: "A" },
+            // ... (Add the rest of the opcodes based on your table)
+        };
+
         function convertNumber() {
             const number = document.getElementById("number").value;
             const base = parseInt(document.getElementById("base").value);
@@ -109,6 +125,23 @@
             document.getElementById("calcResultDecimal").innerText = resultValues.decimal;
             document.getElementById("calcResultHexadecimal").innerText = resultValues.hexadecimal;
         }
+
+        function searchOpcode() {
+            const input = document.getElementById("opcodeInput").value.trim().toUpperCase();
+            let result = "";
+
+            if (opcodeTable[input]) {
+                result = `${input}: ${opcodeTable[input].mnemonic} ${opcodeTable[input].operands}`;
+            } else {
+                for (let key in opcodeTable) {
+                    if (opcodeTable[key].mnemonic === input) {
+                        result += `${key}: ${opcodeTable[key].mnemonic} ${opcodeTable[key].operands}\n`;
+                    }
+                }
+            }
+
+            document.getElementById("opcodeResult").innerText = result || "No match found";
+        }
     </script>
 </head>
 <body>
@@ -117,7 +150,7 @@
             <div class="card-header">Number Base Converter</div>
             <div class="card-body">
                 <div class="mb-3">
-                    <label for="number" class="form-label">Enter a number and select its base to convert:</label>
+                    <label for="number" class="form-label" data-bs-toggle="tooltip" title="ROM is a type of internal data memory that retains data even when the power is off. RAM, including Special Function Registers, is volatile memory used for temporary data storage.">Enter a number and select its base to convert:</label>
                     <input type="text" id="number" class="form-control" placeholder="Enter number">
                     <select id="base" class="form-select mt-2">
                         <option value="2">Binary</option>
@@ -169,6 +202,21 @@
                     <p><span class="result-label">Octal:</span> <span id="calcResultOctal"></span></p>
                     <p><span class="result-label">Decimal:</span> <span id="calcResultDecimal"></span></p>
                     <p><span class="result-label">Hexadecimal:</span> <span id="calcResultHexadecimal"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Opcode Converter</div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="opcodeInput" class="form-label" data-bs-toggle="tooltip" title="Mnemonic represents the human-readable form of machine code used in assembly programming.">Enter Opcode or Mnemonic:</label>
+                    <input type="text" id="opcodeInput" class="form-control" placeholder="Enter opcode or mnemonic">
+                </div>
+                <button onclick="searchOpcode()" class="btn btn-primary w-100">Search</button>
+                <div class="result-group mt-3">
+                    <h5>Opcode Result:</h5>
+                    <p id="opcodeResult"></p>
                 </div>
             </div>
         </div>
