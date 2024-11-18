@@ -144,23 +144,16 @@
 
                 // Search for matching opcode in the table
                 for (let key in opcodeTable) {
-                    if (opcodeTable[key].mnemonic.trim() === mnemonic && opcodeTable[key].operands.startsWith(operand1)) {
-                        if (operand2 !== null && opcodeTable[key].operands.includes(operand2)) {
-                            // Handle case with two operands
+                    if (opcodeTable[key].mnemonic.trim() === mnemonic && opcodeTable[key].operands.includes(operand1)) {
+                        if (operand2 === null || opcodeTable[key].operands.includes(operand2)) {
+                            // Handle case with one or two operands
                             result = `result = ${inputStr} = ${key}`;
                             details = `Hex Code : ${key}
 Number of Bytes : ${opcodeTable[key].number_of_bytes}
 Mnemonic : ${opcodeTable[key].mnemonic}
 Operands : ${opcodeTable[key].operands}`;
-                        } else if (operand2 === null) {
-                            // Handle case with single operand or immediate data
-                            result = `result = ${inputStr} = ${key}`;
-                            details = `Hex Code : ${key}
-Number of Bytes : ${opcodeTable[key].number_of_bytes}
-Mnemonic : ${opcodeTable[key].mnemonic}
-Operands : ${opcodeTable[key].operands}`;
+                            break;
                         }
-                        break;
                     }
                 }
             }
