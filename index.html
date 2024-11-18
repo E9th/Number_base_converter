@@ -127,71 +127,47 @@
             document.getElementById("calcResultHexadecimal").innerText = resultValues.hexadecimal;
         }
 
-        function getNumberOfBytes(operands) {
-            if (operands.includes("#data")) {
-                return 2; // คำสั่งที่มี immediate data ใช้ 2 byte
-            }
-            return 1; // คำสั่งทั่วไปใช้ 1 byte
-        }
+        function searchOpcode() {
+            const inputStr = document.getElementById("opcodeInput").value.trim().toUpperCase();
+            let result = "";
+            let details = "";
 
-function searchOpcode() {
-    const input = document.getElementById("opcodeInput").value.trim().toUpperCase();
-    let result = "";
-    let details = "";
+            // Match input pattern with or without immediate data
+            const match = inputStr.match(/(\w+)\s+(\w+)(?:,?#?([0-9A-Fa-f]+)H?)?/);
+            if (match) {
+                const mnemonic = match[1].trim(); // e.g., "ADD"
+                const operand1 = match[2].trim(); // e.g., "A"
+                const immediateData = match[3] ? parseInt(match[3], 16) : null; // e.g., "15H" or null
+                
+                console.log('Mnemonic:', mnemonic);
+                console.log('Operands:', operand1, immediateData);
 
-    // Match input pattern such as ADD A#1024
-    const match = input.match(/(\w+\s+\w+)#(\w+)/);
-    if (match) {
-        const mnemonic = match[1].trim(); // e.g., "ADD A"
-        let immediateData = match[2]; // e.g., "1024"
-        const immediateDataInt = parseInt(immediateData, 10); // Convert to integer
-
-        console.log('Mnemonic:', mnemonic);
-        console.log('Immediate Data:', immediateDataInt);
-
-        // Check if immediate data needs to be split into bytes
-        if (immediateDataInt > 0xFF) {
-            const part1 = ((immediateDataInt >> 8) & 0xFF).toString(16).toUpperCase().padStart(2, '0'); // High byte
-            const part2 = (immediateDataInt & 0xFF).toString(16).toUpperCase().padStart(2, '0'); // Low byte
-
-            for (let key in opcodeTable) {
-                if (opcodeTable[key].mnemonic.trim() === mnemonic && opcodeTable[key].operands.includes("#data")) {
-                    const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
-                    result = `result = ${input} = ${key}${part1} ${key}${part2}`;
-                    details = `
-Hex Code        : ${key}
-Number of Bytes : ${numberOfBytes}
-Mnemonic        : ${opcodeTable[key].mnemonic}
-Operands        : ${opcodeTable[key].operands}
-                    `;
-                    break;
+                // Search for matching opcode in the table
+                for (let key in opcodeTable) {
+                    if (opcodeTable[key].mnemonic.trim() === mnemonic && opcodeTable[key].operands.startsWith(operand1)) {
+                        if (immediateData !== null) {
+                            // Handle case where there is immediate data
+                            const immediateDataHex = immediateData.toString(16).toUpperCase().padStart(2, '0');
+                            result = `result = ${inputStr} = ${key}${immediateDataHex}`;
+                        } else {
+                            // Handle case without immediate data
+                            result = `result = ${inputStr} = ${key}`;
+                        }
+                        details = `Hex Code : ${key}
+Number of Bytes : ${opcodeTable[key].number_of_bytes}
+Mnemonic : ${opcodeTable[key].mnemonic}
+Operands : ${opcodeTable[key].operands}`;
+                        break;
+                    }
                 }
             }
-        } else {
-            // Handle cases where immediate data fits within one byte
-            for (let key in opcodeTable) {
-                if (opcodeTable[key].mnemonic.trim() === mnemonic && opcodeTable[key].operands.includes("#data")) {
-                    const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
-                    result = `result = ${input} = ${key}${immediateDataInt.toString(16).toUpperCase().padStart(2, '0')}`;
-                    details = `
-Hex Code        : ${key}
-Number of Bytes : ${numberOfBytes}
-Mnemonic        : ${opcodeTable[key].mnemonic}
-Operands        : ${opcodeTable[key].operands}
-                    `;
-                    break;
-                }
+
+            if (!result) {
+                result = "No match found";
             }
+
+            document.getElementById("opcodeResult").innerText = `${details}\n${result}`;
         }
-    }
-
-    if (!result) {
-        result = "No match found";
-    }
-
-    document.getElementById("opcodeResult").innerText = `${details}\n${result}`;
-}
-
     </script>
 </head>
 <body>
