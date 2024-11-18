@@ -147,16 +147,32 @@
                     if (opcodeTable[key].mnemonic.trim() === mnemonic && opcodeTable[key].operands.startsWith(operand1)) {
                         if (immediateData !== null) {
                             // Handle case where there is immediate data
+                            const numberOfBytes = opcodeTable[key].number_of_bytes;
                             const immediateDataHex = immediateData.toString(16).toUpperCase().padStart(2, '0');
-                            result = `result = ${inputStr} = ${key}${immediateDataHex}`;
+                            // If immediate data is larger than 8 bits, split it
+                            if (immediateData > 0xFF) {
+                                const part1 = (immediateData >> 8) & 0xFF;
+                                const part2 = immediateData & 0xFF;
+                                result = `result = ${inputStr} = ${key}${part1.toString(16).toUpperCase().padStart(2, '0')} ${key}${part2.toString(16).toUpperCase().padStart(2, '0')}`;
+                                details = `Hex Code : ${key}
+Number of Bytes : 4 (2 + 2)
+Mnemonic : ${opcodeTable[key].mnemonic}
+Operands : ${opcodeTable[key].operands}`;
+                            } else {
+                                result = `result = ${inputStr} = ${key}${immediateDataHex}`;
+                                details = `Hex Code : ${key}
+Number of Bytes : ${numberOfBytes}
+Mnemonic : ${opcodeTable[key].mnemonic}
+Operands : ${opcodeTable[key].operands}`;
+                            }
                         } else {
                             // Handle case without immediate data
                             result = `result = ${inputStr} = ${key}`;
-                        }
-                        details = `Hex Code : ${key}
+                            details = `Hex Code : ${key}
 Number of Bytes : ${opcodeTable[key].number_of_bytes}
 Mnemonic : ${opcodeTable[key].mnemonic}
 Operands : ${opcodeTable[key].operands}`;
+                        }
                         break;
                     }
                 }
@@ -252,4 +268,3 @@ Operands : ${opcodeTable[key].operands}`;
     </div>
 </body>
 </html>
-
