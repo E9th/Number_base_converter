@@ -135,40 +135,41 @@
         }
 
         function searchOpcode() {
-            const input = document.getElementById("opcodeInput").value.trim().toUpperCase();
-            let result = "";
-            let details = "";
+    const input = document.getElementById("opcodeInput").value.trim().toUpperCase();
+    let result = "";
+    let details = "";
 
-            // ปรับรูปแบบการตรวจสอบให้รองรับ ADD A#data
-            const match = input.match(/(\w+\s+\w+)#(\w+)/);
-            if (match) {
-                const mnemonic = match[1].trim(); // เช่น "ADD A"
-                const immediateData = match[2]; // เช่น "38"
-                console.log('Mnemonic:', mnemonic);
-                console.log('Immediate Data:', immediateData);
+    // ตรวจสอบรูปแบบการป้อนข้อมูล เช่น ADD A#38
+    const match = input.match(/(\w+\s+\w+)#(\w+)/);
+    if (match) {
+        const mnemonic = match[1].trim(); // เช่น "ADD A"
+        const immediateData = match[2]; // เช่น "38"
+        console.log('Mnemonic:', mnemonic);
+        console.log('Immediate Data:', immediateData);
 
-                // ตรวจสอบใน opcodeTable
-                for (let key in opcodeTable) {
-                    if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
-                        const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
-                        result = `result = ${input} = ${key}${immediateData}`;
-                        details = `
+        // ค้นหาใน opcodeTable
+        for (let key in opcodeTable) {
+            if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
+                const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
+                result = `result = ${input} = ${key}${immediateData}`;
+                details = `
 Hex Code        : ${key}
 Number of Bytes : ${numberOfBytes}
 Mnemonic        : ${opcodeTable[key].mnemonic}
 Operands        : ${opcodeTable[key].operands}
-                        `;
-                        break;
-                    }
-                }
+                `;
+                break;
             }
-
-            if (!result) {
-                result = "No match found";
-            }
-
-            document.getElementById("opcodeResult").innerText = `${details}\n${result}`;
         }
+    }
+
+    if (!result) {
+        result = "No match found";
+    }
+
+    document.getElementById("opcodeResult").innerText = `${details}\n${result}`;
+}
+
     </script>
 </head>
 <body>
