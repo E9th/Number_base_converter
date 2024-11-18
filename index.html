@@ -88,27 +88,24 @@
             return 1; // คำสั่งทั่วไปใช้ 1 byte
         }
 
-        function searchOpcode() {
+function searchOpcode() {
     const input = document.getElementById("opcodeInput").value.trim().toUpperCase();
     let result = "";
     let details = "";
 
     // ตรวจสอบรูปแบบการป้อนข้อมูล เช่น ADD A#1024
-    const match = input.match(/(\w+)\s+A#(\w+)/);
+    const match = input.match(/(\w+\s+\w+)#(\w+)/);
     if (match) {
-        const mnemonic = match[1].trim(); // เช่น "ADD"
-        const immediateData = match[2]; // เช่น "1024"
+        const mnemonic = match[1].trim(); // เช่น "ADD A"
+        let immediateData = match[2]; // เช่น "1024"
         const immediateDataInt = parseInt(immediateData, 16); // แปลง immediate data เป็นเลขฐาน 16
-        console.log('Mnemonic:', mnemonic);
-        console.log('Immediate Data:', immediateData);
 
-        // ตรวจสอบว่าข้อมูล immediate data เกิน 8 บิตหรือไม่
+        // ตรวจสอบ immediate data ว่าเกิน 8 บิตหรือไม่
         if (immediateDataInt > 0xFF) {
-            // แบ่งข้อมูลออกเป็นสองส่วน ไม่เกิน 8 บิตแต่ละส่วน
-            const part1 = (immediateDataInt >> 8).toString(16).toUpperCase().padStart(2, '0'); // ข้อมูล 8 บิตบน
-            const part2 = (immediateDataInt & 0xFF).toString(16).toUpperCase().padStart(2, '0'); // ข้อมูล 8 บิตล่าง
+            // แบ่งข้อมูลออกเป็น 2 ส่วนย่อยๆ ที่ไม่เกิน 8 บิต
+            const part1 = ((immediateDataInt >> 8) & 0xFF).toString(16).toUpperCase().padStart(2, '0');
+            const part2 = (immediateDataInt & 0xFF).toString(16).toUpperCase().padStart(2, '0');
 
-            // ค้นหาใน opcodeTable
             for (let key in opcodeTable) {
                 if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
                     const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
@@ -123,7 +120,7 @@ Operands        : ${opcodeTable[key].operands}
                 }
             }
         } else {
-            // กรณีที่ immediate data ไม่เกิน 8 บิต
+            // immediate data ไม่เกิน 8 บิต
             for (let key in opcodeTable) {
                 if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
                     const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
