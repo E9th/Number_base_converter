@@ -133,41 +133,27 @@
             let details = "";
 
             // Match input pattern with or without immediate data
-            const match = inputStr.match(/(\w+)\s+(\w+)(?:,?#?([0-9A-Fa-f]+)H?)?/);
+            const match = inputStr.match(/(\w+)\s+(\w+)(?:,?\s*(\w+))?/);
             if (match) {
                 const mnemonic = match[1].trim(); // e.g., "ADD"
                 const operand1 = match[2].trim(); // e.g., "A"
-                const immediateData = match[3] ? parseInt(match[3], 16) : null; // e.g., "15H" or null
+                const operand2 = match[3] ? match[3].trim() : null; // e.g., "R0" or null
                 
                 console.log('Mnemonic:', mnemonic);
-                console.log('Operands:', operand1, immediateData);
+                console.log('Operands:', operand1, operand2);
 
                 // Search for matching opcode in the table
                 for (let key in opcodeTable) {
                     if (opcodeTable[key].mnemonic.trim() === mnemonic && opcodeTable[key].operands.startsWith(operand1)) {
-                        if (immediateData !== null) {
-                            // Handle case where there is immediate data
-                            const numberOfBytes = immediateData > 0xFF ? 2 : 1;
-                            const immediateDataHex = immediateData.toString(16).toUpperCase().padStart(2, '0');
-                            // If immediate data is larger than 8 bits, split it
-                            if (immediateData > 0xFF) {
-                                const part1 = (immediateData >> 8) & 0xFF;
-                                const part2 = immediateData & 0xFF;
-                                result = `result = ${inputStr} = ${key}${part1.toString(16).toUpperCase().padStart(2, '0')} ${key}${part2.toString(16).toUpperCase().padStart(2, '0')}`;
-                                details = `Hex Code : ${key}
-Number of Bytes : ${numberOfBytes * 2} (2 + 2)
+                        if (operand2 !== null && opcodeTable[key].operands.includes(operand2)) {
+                            // Handle case with two operands
+                            result = `result = ${inputStr} = ${key}`;
+                            details = `Hex Code : ${key}
+Number of Bytes : ${opcodeTable[key].number_of_bytes}
 Mnemonic : ${opcodeTable[key].mnemonic}
 Operands : ${opcodeTable[key].operands}`;
-                            } else {
-                                const formattedImmediateData = immediateDataHex.padStart(2, '0'); // Pad with 0 to ensure it's 8-bit
-                                result = `result = ${inputStr} = ${key}${formattedImmediateData}`;
-                                details = `Hex Code : ${key}
-Number of Bytes : ${numberOfBytes}
-Mnemonic : ${opcodeTable[key].mnemonic}
-Operands : ${opcodeTable[key].operands}`;
-                            }
-                        } else {
-                            // Handle case without immediate data
+                        } else if (operand2 === null) {
+                            // Handle case with single operand or immediate data
                             result = `result = ${inputStr} = ${key}`;
                             details = `Hex Code : ${key}
 Number of Bytes : ${opcodeTable[key].number_of_bytes}
