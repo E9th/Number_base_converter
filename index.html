@@ -148,9 +148,10 @@
                         if (operand2 && operand2.startsWith('#')) {
                             // Handle immediate data case
                             const immediateData = parseInt(operand2.slice(1), 16);
+                            const highByte = ((immediateData >> 8) & 0xFF).toString(16).toUpperCase().padStart(2, '0');
                             const lowByte = (immediateData & 0xFF).toString(16).toUpperCase().padStart(2, '0');
-                            result = `result = ${inputStr} = ${key}${lowByte}`;
-                            const byteCount = 2; // 1 byte for opcode and 1 byte for immediate data
+                            result = `result = ${inputStr} = ${key}${highByte} ${key}${lowByte}`;
+                            const byteCount = 4; // 2 bytes for opcode and 2 bytes for immediate data
                             details = `Hex Code : ${key}
 Number of Bytes : ${byteCount}
 Mnemonic : ${opcodeTable[key].mnemonic}
@@ -158,7 +159,7 @@ Operands : ${opcodeTable[key].operands}`;
                         } else if (operand2 === null || opcodeTable[key].operands.includes(operand2)) {
                             // Handle case with one or two operands
                             result = `result = ${inputStr} = ${key}`;
-                            const byteCount = key.length / 2;
+                            const byteCount = opcodeTable[key].number_of_bytes;
                             details = `Hex Code : ${key}
 Number of Bytes : ${byteCount}
 Mnemonic : ${opcodeTable[key].mnemonic}
