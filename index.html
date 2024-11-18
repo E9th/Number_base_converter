@@ -147,9 +147,10 @@
         console.log('Mnemonic:', mnemonic);
         console.log('Immediate Data:', immediateData);
 
-        // ค้นหาใน opcodeTable
+        // ตรวจสอบใน opcodeTable
         for (let key in opcodeTable) {
-            if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
+            console.log('Comparing with opcode mnemonic:', opcodeTable[key].mnemonic);
+            if (opcodeTable[key].mnemonic.trim() === mnemonic && opcodeTable[key].operands.includes("#data")) {
                 const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
                 result = `result = ${input} = ${key}${immediateData}`;
                 details = `
