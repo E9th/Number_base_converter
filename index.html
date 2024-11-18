@@ -136,47 +136,25 @@
             let result = "";
             let details = "";
 
-            // ตรวจสอบว่ามี immediate data หรือไม่
-            const match = input.match(/(\w+)\s*,\s*#(\w+)/);
+            // ปรับรูปแบบการตรวจสอบให้รองรับ ADD A#data
+            const match = input.match(/(\w+\s+\w+)#(\w+)/);
             if (match) {
-                const mnemonic = match[1]; // เช่น "ADD A"
-                const immediateData = match[2]; // เช่น "0308"
+                const mnemonic = match[1].trim(); // เช่น "ADD A"
+                const immediateData = match[2]; // เช่น "38"
                 const immediateDataInt = parseInt(immediateData, 16); // แปลงเป็นเลขฐานสิบ
 
-                // ตรวจสอบว่า immediate data เกินช่วง 8 บิตหรือไม่
-                if (immediateDataInt > 0xFF) {
-                    // แบ่งข้อมูลออกเป็นสองส่วน แต่ละส่วนไม่เกิน 8 บิต
-                    const part1 = (immediateDataInt >> 8).toString(16).toUpperCase().padStart(2, '0'); // ข้อมูล 8 บิตด้านบน
-                    const part2 = (immediateDataInt & 0xFF).toString(16).toUpperCase().padStart(2, '0'); // ข้อมูล 8 บิตด้านล่าง
-
-                    // ค้นหา opcode สำหรับ mnemonic ที่ตรงกัน
-                    for (let key in opcodeTable) {
-                        if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
-                            const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
-                            result = `result = ${input} = ${key}${part1} ${key}${part2}`;
-                            details = `
+                // ค้นหา opcode ที่ตรงกันในตาราง
+                for (let key in opcodeTable) {
+                    if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
+                        const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
+                        result = `result = ${input} = ${key}${immediateData}`;
+                        details = `
 Hex Code        : ${key}
 Number of Bytes : ${numberOfBytes}
 Mnemonic        : ${opcodeTable[key].mnemonic}
 Operands        : ${opcodeTable[key].operands}
-                            `;
-                            break;
-                        }
-                    }
-                } else {
-                    // ค้นหา opcode สำหรับกรณีที่ immediate data ไม่เกิน 8 บิต
-                    for (let key in opcodeTable) {
-                        if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
-                            const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
-                            result = `result = ${input} = ${key}${immediateData}`;
-                            details = `
-Hex Code        : ${key}
-Number of Bytes : ${numberOfBytes}
-Mnemonic        : ${opcodeTable[key].mnemonic}
-Operands        : ${opcodeTable[key].operands}
-                            `;
-                            break;
-                        }
+                        `;
+                        break;
                     }
                 }
             }
