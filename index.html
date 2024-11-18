@@ -93,46 +93,26 @@ function searchOpcode() {
     let result = "";
     let details = "";
 
-    // ตรวจสอบรูปแบบการป้อนข้อมูล เช่น ADD A#1024
-    const match = input.match(/(\w+\s+\w+)#(\w+)/);
+    // ตรวจสอบรูปแบบการป้อนข้อมูล เช่น INC R0
+    const match = input.match(/(\w+)\s+(\w+)/);
     if (match) {
-        const mnemonic = match[1].trim(); // เช่น "ADD A"
-        let immediateData = match[2]; // เช่น "1024"
-        const immediateDataInt = parseInt(immediateData, 16); // แปลง immediate data เป็นเลขฐาน 16
+        const mnemonic = match[1].trim(); // เช่น "INC"
+        const operand = match[2].trim(); // เช่น "R0"
+        console.log('Mnemonic:', mnemonic);
+        console.log('Operand:', operand);
 
-        // ตรวจสอบ immediate data ว่าเกิน 8 บิตหรือไม่
-        if (immediateDataInt > 0xFF) {
-            // แบ่งข้อมูลออกเป็น 2 ส่วนย่อยๆ ที่ไม่เกิน 8 บิต
-            const part1 = ((immediateDataInt >> 8) & 0xFF).toString(16).toUpperCase().padStart(2, '0');
-            const part2 = (immediateDataInt & 0xFF).toString(16).toUpperCase().padStart(2, '0');
-
-            for (let key in opcodeTable) {
-                if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
-                    const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
-                    result = `result = ${input} = ${key}${part1} ${key}${part2}`;
-                    details = `
+        // ค้นหาใน opcodeTable
+        for (let key in opcodeTable) {
+            if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes(operand)) {
+                const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
+                result = `result = ${input} = ${key}`;
+                details = `
 Hex Code        : ${key}
 Number of Bytes : ${numberOfBytes}
 Mnemonic        : ${opcodeTable[key].mnemonic}
 Operands        : ${opcodeTable[key].operands}
-                    `;
-                    break;
-                }
-            }
-        } else {
-            // immediate data ไม่เกิน 8 บิต
-            for (let key in opcodeTable) {
-                if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
-                    const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
-                    result = `result = ${input} = ${key}${immediateData}`;
-                    details = `
-Hex Code        : ${key}
-Number of Bytes : ${numberOfBytes}
-Mnemonic        : ${opcodeTable[key].mnemonic}
-Operands        : ${opcodeTable[key].operands}
-                    `;
-                    break;
-                }
+                `;
+                break;
             }
         }
     }
