@@ -139,23 +139,24 @@ function searchOpcode() {
     let result = "";
     let details = "";
 
-    // Match input format like "ADD A#1024"
+    // Match input for mnemonic with immediate data (e.g., ADD A#1024)
     const match = input.match(/(\w+\s+\w+)#(\w+)/);
     if (match) {
         const mnemonic = match[1].trim(); // e.g., "ADD A"
         let immediateData = match[2]; // e.g., "1024"
-        const immediateDataInt = parseInt(immediateData, 16); // Convert to integer
+        const immediateDataInt = parseInt(immediateData, 10);
 
         console.log('Mnemonic:', mnemonic);
         console.log('Immediate Data:', immediateDataInt);
 
-        // Split immediate data if it exceeds 8 bits (1 byte)
+        // Check if immediate data needs to be split into 8-bit parts
         if (immediateDataInt > 0xFF) {
             const part1 = ((immediateDataInt >> 8) & 0xFF).toString(16).toUpperCase().padStart(2, '0');
             const part2 = (immediateDataInt & 0xFF).toString(16).toUpperCase().padStart(2, '0');
 
+            // Search in opcodeTable for matching mnemonic
             for (let key in opcodeTable) {
-                if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
+                if (opcodeTable[key].mnemonic.trim() === mnemonic && opcodeTable[key].operands.includes("#data")) {
                     const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
                     result = `result = ${input} = ${key}${part1} ${key}${part2}`;
                     details = `
@@ -168,13 +169,12 @@ Operands        : ${opcodeTable[key].operands}
                 }
             }
         } else {
-            // Handle immediate data that fits in 8 bits
-            const immediateDataHex = immediateDataInt.toString(16).toUpperCase().padStart(2, '0');
-
+            // Immediate data is within 8 bits
+            const immediateHex = immediateDataInt.toString(16).toUpperCase().padStart(2, '0');
             for (let key in opcodeTable) {
-                if (opcodeTable[key].mnemonic === mnemonic && opcodeTable[key].operands.includes("#data")) {
+                if (opcodeTable[key].mnemonic.trim() === mnemonic && opcodeTable[key].operands.includes("#data")) {
                     const numberOfBytes = getNumberOfBytes(opcodeTable[key].operands);
-                    result = `result = ${input} = ${key}${immediateDataHex}`;
+                    result = `result = ${input} = ${key}${immediateHex}`;
                     details = `
 Hex Code        : ${key}
 Number of Bytes : ${numberOfBytes}
@@ -193,6 +193,7 @@ Operands        : ${opcodeTable[key].operands}
 
     document.getElementById("opcodeResult").innerText = `${details}\n${result}`;
 }
+
 
     </script>
 </head>
