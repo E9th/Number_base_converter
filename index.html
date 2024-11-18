@@ -159,7 +159,7 @@ Number of Bytes : 4 (2 + 2)
 Mnemonic : ${opcodeTable[key].mnemonic}
 Operands : ${opcodeTable[key].operands}`;
                             } else {
-                                const formattedImmediateData = immediateDataHex.padStart(4, '0'); // Pad with 0 to ensure it's 8-bit
+                                const formattedImmediateData = immediateDataHex.padStart(2, '0'); // Pad with 0 to ensure it's 8-bit
                                 result = `result = ${inputStr} = ${key}${formattedImmediateData}`;
                                 details = `Hex Code : ${key}
 Number of Bytes : ${numberOfBytes}
