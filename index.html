@@ -133,11 +133,11 @@
             let details = "";
 
             // Match input pattern with or without immediate data
-            const match = inputStr.match(/(\w+)\s+(\w+)(?:,?\s*(\w+))?/);
+            const match = inputStr.match(/(\w+)\s+(\w+)(?:,?\s*(#?\w+))?/);
             if (match) {
                 const mnemonic = match[1].trim(); // e.g., "ADD"
                 const operand1 = match[2].trim(); // e.g., "A"
-                const operand2 = match[3] ? match[3].trim() : null; // e.g., "R0" or null
+                const operand2 = match[3] ? match[3].trim() : null; // e.g., "#4567" or null
                 
                 console.log('Mnemonic:', mnemonic);
                 console.log('Operands:', operand1, operand2);
@@ -145,15 +145,27 @@
                 // Search for matching opcode in the table
                 for (let key in opcodeTable) {
                     if (opcodeTable[key].mnemonic.trim() === mnemonic && opcodeTable[key].operands.includes(operand1)) {
-                        if (operand2 === null || opcodeTable[key].operands.includes(operand2)) {
-                            // Handle case with one or two operands
-                            result = `result = ${inputStr} = ${key}`;
-                            details = `Hex Code : ${key}
-Number of Bytes : ${opcodeTable[key].number_of_bytes}
+                        if (operand2 && operand2.startsWith('#')) {
+                            // Handle immediate data case
+                            const immediateData = parseInt(operand2.slice(1), 16);
+                            const highByte = ((immediateData >> 8) & 0xFF).toString(16).toUpperCase().padStart(2, '0');
+                            const lowByte = (immediateData & 0xFF).toString(16).toUpperCase().padStart(2, '0');
+                            result = `result = ${inputStr} = ${key}${highByte} ${key}${lowByte}`;
+                            const byteCount = result.replace(/\s+/g, '').length / 2;
+                            details = `Hex Code : ${key} ${highByte} ${lowByte}
+Number of Bytes : ${byteCount}
 Mnemonic : ${opcodeTable[key].mnemonic}
 Operands : ${opcodeTable[key].operands}`;
-                            break;
+                        } else if (operand2 === null || opcodeTable[key].operands.includes(operand2)) {
+                            // Handle case with one or two operands
+                            result = `result = ${inputStr} = ${key}`;
+                            const byteCount = result.replace(/\s+/g, '').length / 2;
+                            details = `Hex Code : ${key}
+Number of Bytes : ${byteCount}
+Mnemonic : ${opcodeTable[key].mnemonic}
+Operands : ${opcodeTable[key].operands}`;
                         }
+                        break;
                     }
                 }
             }
