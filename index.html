@@ -148,18 +148,18 @@
                         if (operand2 && operand2.startsWith('#')) {
                             // Handle immediate data case
                             const immediateData = parseInt(operand2.slice(1), 16);
-                            const highByte = ((immediateData >> 8) & 0xFF).toString(16).toUpperCase().padStart(2, '0');
-                            const lowByte = (immediateData & 0xFF).toString(16).toUpperCase().padStart(2, '0');
-                            if (immediateData > 0xFF) {
-                                result = `result = ${inputStr} = ${key}${highByte} ${key}${lowByte}`;
-                                const byteCount = 4; // 2 bytes for opcode and 2 bytes for immediate data
+                            if (immediateData <= 0xFF) {
+                                result = `result = ${inputStr} = ${key}${immediateData.toString(16).toUpperCase().padStart(2, '0')}`;
+                                const byteCount = 2; // 1 byte for opcode and 1 byte for immediate data
                                 details = `Hex Code : ${key}
 Number of Bytes : ${byteCount}
 Mnemonic : ${opcodeTable[key].mnemonic}
 Operands : ${opcodeTable[key].operands}`;
                             } else {
-                                result = `result = ${inputStr} = ${key}${lowByte}`;
-                                const byteCount = 2; // 1 byte for opcode and 1 byte for immediate data
+                                const highByte = ((immediateData >> 8) & 0xFF).toString(16).toUpperCase().padStart(2, '0');
+                                const lowByte = (immediateData & 0xFF).toString(16).toUpperCase().padStart(2, '0');
+                                result = `result = ${inputStr} = ${key}${highByte} ${key}${lowByte}`;
+                                const byteCount = 4; // 2 bytes for opcode and 2 bytes for immediate data
                                 details = `Hex Code : ${key}
 Number of Bytes : ${byteCount}
 Mnemonic : ${opcodeTable[key].mnemonic}
@@ -184,6 +184,34 @@ Operands : ${opcodeTable[key].operands}`;
             }
 
             document.getElementById("opcodeResult").innerText = `${details}\n${result}`;
+        }
+
+        function calculateOffset(address1, address2) {
+            const addr1 = parseInt(address1, 16);
+            const addr2 = parseInt(address2, 16);
+            let offset = addr2 - addr1;
+            if (offset < 0) {
+                offset = (0x100 + offset).toString(2).split('').map(bit => bit === '0' ? '1' : '0').join(''); // 1's complement
+                offset = (parseInt(offset, 2) + 1).toString(16).toUpperCase(); // 2's complement
+            } else {
+                offset = offset.toString(16).toUpperCase();
+            }
+            return offset;
+        }
+
+        function addSubtractAddress() {
+            const address1 = document.getElementById("address1").value.trim();
+            const address2 = document.getElementById("address2").value.trim();
+            const operation = document.getElementById("addressOperation").value;
+            let result = "";
+
+            if (operation === 'add') {
+                result = (parseInt(address1, 16) + parseInt(address2, 16)).toString(16).toUpperCase();
+            } else if (operation === 'subtract') {
+                result = calculateOffset(address1, address2);
+            }
+
+            document.getElementById("addressResult").innerText = `Result: ${result}`;
         }
 
         // Disable right-click and certain key combinations
@@ -271,6 +299,32 @@ Operands : ${opcodeTable[key].operands}`;
                 <div class="result-group mt-3">
                     <h5>Opcode Result:</h5>
                     <pre id="opcodeResult"></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section for Address Calculator -->
+        <div class="card">
+            <div class="card-header">Address Calculator</div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="address1" class="form-label">Enter Address 1:</label>
+                    <input type="text" id="address1" class="form-control" placeholder="Enter first address (hexadecimal)">
+                </div>
+                <div class="mb-3">
+                    <label for="address2" class="form-label">Enter Address 2:</label>
+                    <input type="text" id="address2" class="form-control" placeholder="Enter second address (hexadecimal)">
+                </div>
+                <div class="mb-3">
+                    <select id="addressOperation" class="form-select">
+                        <option value="add">Add</option>
+                        <option value="subtract">Subtract</option>
+                    </select>
+                </div>
+                <button onclick="addSubtractAddress()" class="btn btn-primary w-100">Calculate</button>
+                <div class="result-group mt-3">
+                    <h5>Address Calculation Result:</h5>
+                    <pre id="addressResult"></pre>
                 </div>
             </div>
         </div>
