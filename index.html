@@ -204,20 +204,63 @@ offset = offset.toString(16).toUpperCase();
 return offset;
 }
 
+    function calculatePSWFlags(address1, address2, operation) {
+    const pswFlags = {
+        CY: false, // Carry Flag
+        AC: false, // Auxiliary Carry Flag
+        F0: false, // User-defined Flag
+        OV: false, // Overflow Flag
+        P: false   // Parity Flag
+    };
+
+    const addr1 = parseInt(address1, 16);
+    const addr2 = parseInt(address2, 16);
+    let result = 0;
+
+    if (operation === 'add') {
+        result = addr1 + addr2;
+
+        // Set Carry Flag if overflow occurs
+        pswFlags.CY = result > 0xFFFF; // Assuming 16-bit calculation
+    } else if (operation === 'subtract') {
+        result = addr1 - addr2;
+
+        // Set Carry Flag if borrow occurs
+        pswFlags.CY = result < 0;
+        if (result < 0) {
+            result = 0xFFFF + result + 1; // Perform two's complement for negative results
+        }
+    }
+
+    // Update Overflow Flag (OV)
+    pswFlags.OV = (result & 0x8000) !== 0; // Check if the sign bit is set
+
+    // Update Parity Flag (P) - Number of 1 bits in the result
+    pswFlags.P = (result.toString(2).split('1').length - 1) % 2 === 0;
+
+    // Format result in hexadecimal
+    const formattedResult = result.toString(16).toUpperCase().padStart(4, '0');
+
+    // Return flags and result
+    return {
+        result: formattedResult,
+        flags: pswFlags
+    };
+}
+
+// Example integration in addSubtractAddress
 function addSubtractAddress() {
-const address1 = document.getElementById("address1").value.trim();
-const address2 = document.getElementById("address2").value.trim();
-const operation = document.getElementById("addressOperation").value;
-let result = "";
+    const address1 = document.getElementById("address1").value.trim();
+    const address2 = document.getElementById("address2").value.trim();
+    const operation = document.getElementById("addressOperation").value;
 
-if (operation === 'add') {
-result = (parseInt(address1, 16) + parseInt(address2, 16)).toString(16).toUpperCase();
-} else if (operation === 'subtract') {
-result = calculateOffset(address1, address2);
+    const { result, flags } = calculatePSWFlags(address1, address2, operation);
+
+    // Display result and flags
+    let flagDetails = `Flags:\nCarry (CY): ${flags.CY}\nAuxiliary Carry (AC): ${flags.AC}\nOverflow (OV): ${flags.OV}\nParity (P): ${flags.P}\n`;
+    document.getElementById("addressResult").innerText = `Result: ${result}\n${flagDetails}`;
 }
 
-document.getElementById("addressResult").innerText = `Result: ${result}`;
-}
 
 // Disable right-click and certain key combinations
 document.addEventListener('contextmenu', event => event.preventDefault());
