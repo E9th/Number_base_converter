@@ -170,33 +170,47 @@ function toUnpackedBCD(number) {
     return digits.join(' ');
 }
 
-function calculate(operation) {
-const number1 = parseInt(document.getElementById("number1").value, parseInt(document.getElementById("base1").value));
-const number2 = parseInt(document.getElementById("number2").value, parseInt(document.getElementById("base2").value));
-let result;
+function calculateBaseOperation(operation) {
+    const number1 = parseInt(document.getElementById("number1").value, parseInt(document.getElementById("base1").value));
+    const number2 = parseInt(document.getElementById("number2").value, parseInt(document.getElementById("base2").value));
+    let result;
 
-switch (operation) {
-case 'add':
-result = number1 + number2;
-break;
-case 'subtract':
-result = number1 - number2;
-break;
-default:
-result = "Invalid Operation";
-}
+    // Perform the selected operation
+    switch (operation) {
+        case 'add':
+            result = number1 + number2;
+            break;
+        case 'subtract':
+            result = number1 - number2;
+            break;
+        case 'multiply':
+            result = number1 * number2;
+            break;
+        case 'divide':
+            if (number2 === 0) {
+                alert("Cannot divide by zero!");
+                return;
+            }
+            result = Math.floor(number1 / number2); // Integer division
+            break;
+        default:
+            alert("Invalid operation selected.");
+            return;
+    }
 
-let resultValues = {
-binary: result.toString(2),
-octal: result.toString(8),
-decimal: result.toString(10),
-hexadecimal: result.toString(16).toUpperCase()
-};
+    // Convert result to all bases
+    const resultValues = {
+        binary: result.toString(2),
+        octal: result.toString(8),
+        decimal: result.toString(10),
+        hexadecimal: result.toString(16).toUpperCase()
+    };
 
-document.getElementById("calcResultBinary").innerText = resultValues.binary;
-document.getElementById("calcResultOctal").innerText = resultValues.octal;
-document.getElementById("calcResultDecimal").innerText = resultValues.decimal;
-document.getElementById("calcResultHexadecimal").innerText = resultValues.hexadecimal;
+    // Display the results
+    document.getElementById("calcResultBinary").innerText = resultValues.binary;
+    document.getElementById("calcResultOctal").innerText = resultValues.octal;
+    document.getElementById("calcResultDecimal").innerText = resultValues.decimal;
+    document.getElementById("calcResultHexadecimal").innerText = resultValues.hexadecimal;
 }
 
     function calculateExecutionTime(instructions, clockFrequency) {
@@ -392,38 +406,13 @@ function addSubtractAddress() {
             <label for="number" class="form-label">Enter a number and select its base to convert:</label>
             <input type="text" id="number" class="form-control" placeholder="Enter number">
             <select id="base" class="form-select mt-2">
-                <option value="2">Binary</option>
-                <option value="8">Octal</option>
-                <option value="10">Decimal</option>
-                <option value="16">Hexadecimal</option>
-            </select>
-        </div>
-        <button onclick="convertNumber()" class="btn btn-primary w-100">Convert</button>
-        <div class="result-group mt-3">
-            <h5>Converted Values:</h5>
-            <p><span class="result-label">Binary:</span> <span id="resultBinary"></span></p>
-            <p><span class="result-label">Octal:</span> <span id="resultOctal"></span></p>
-            <p><span class="result-label">Decimal:</span> <span id="resultDecimal"></span></p>
-            <p><span class="result-label">Hexadecimal:</span> <span id="resultHexadecimal"></span></p>
-            <p><span class="result-label">BCD:</span> <span id="resultBCD"></span></p> <!-- เพิ่มส่วนแสดงผล BCD -->
-        </div>
-    </div>
-</div>
-
-<!-- Section for Number Base Calculator -->
-<!-- Section for Number Base Converter -->
-<div class="card">
-    <div class="card-header">Number Base Converter</div>
-    <div class="card-body">
-        <div class="mb-3">
-            <label for="number" class="form-label">Enter a number and select its base to convert:</label>
-            <input type="text" id="number" class="form-control" placeholder="Enter number">
-            <select id="base" class="form-select mt-2">
-                <option value="2">Binary</option>
-                <option value="8">Octal</option>
-                <option value="10">Decimal</option>
-                <option value="16">Hexadecimal</option>
-            </select>
+    <option value="2">Binary</option>
+    <option value="8">Octal</option>
+    <option value="10">Decimal</option>
+    <option value="16">Hexadecimal</option>
+    <option value="BCD">Packed BCD</option>
+    <option value="UNPACKED_BCD">Unpacked BCD</option>
+</select>
         </div>
         <button onclick="convertNumber()" class="btn btn-primary w-100">Convert</button>
         <div class="result-group mt-3">
@@ -434,6 +423,44 @@ function addSubtractAddress() {
             <p><span class="result-label">Hexadecimal:</span> <span id="resultHexadecimal"></span></p>
             <p><span class="result-label">BCD (Packed):</span> <span id="resultPackedBCD"></span></p>
             <p><span class="result-label">BCD (Unpacked):</span> <span id="resultUnpackedBCD"></span></p>
+        </div>
+    </div>
+</div>
+    
+<div class="card">
+    <div class="card-header">Number Base Calculator</div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="number1" class="form-label">Enter two numbers and select their bases to calculate:</label>
+            <input type="text" id="number1" class="form-control" placeholder="Enter first number">
+            <select id="base1" class="form-select mt-2">
+                <option value="2">Binary</option>
+                <option value="8">Octal</option>
+                <option value="10">Decimal</option>
+                <option value="16">Hexadecimal</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <input type="text" id="number2" class="form-control" placeholder="Enter second number">
+            <select id="base2" class="form-select mt-2">
+                <option value="2">Binary</option>
+                <option value="8">Octal</option>
+                <option value="10">Decimal</option>
+                <option value="16">Hexadecimal</option>
+            </select>
+        </div>
+        <div class="d-grid gap-2">
+            <button onclick="calculateBaseOperation('add')" class="btn btn-primary">Add</button>
+            <button onclick="calculateBaseOperation('subtract')" class="btn btn-primary">Subtract</button>
+            <button onclick="calculateBaseOperation('multiply')" class="btn btn-primary">Multiply</button>
+            <button onclick="calculateBaseOperation('divide')" class="btn btn-primary">Divide</button>
+        </div>
+        <div class="result-group mt-3">
+            <h5>Calculation Result:</h5>
+            <p><span class="result-label">Binary:</span> <span id="calcResultBinary"></span></p>
+            <p><span class="result-label">Octal:</span> <span id="calcResultOctal"></span></p>
+            <p><span class="result-label">Decimal:</span> <span id="calcResultDecimal"></span></p>
+            <p><span class="result-label">Hexadecimal:</span> <span id="calcResultHexadecimal"></span></p>
         </div>
     </div>
 </div>
