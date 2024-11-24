@@ -132,58 +132,48 @@
     let result = "No match found";
     let details = "";
 
-    // Match input pattern for mnemonic and operands
-    const match = inputStr.match(/(\w+)\s+(\w+),?\s*(#?\w+H?)/); // Capture mnemonic, operand1, operand2
+    // Match input pattern for mnemonic and operand(s)
+    const match = inputStr.match(/(\w+)(?:\s+(\w+))?/); // Capture mnemonic and optional operand
     if (match) {
-        const mnemonic = match[1].trim(); // e.g., "MOV"
-        const operand1 = match[2].trim(); // e.g., "SP"
-        let operand2 = match[3] ? match[3].trim() : null; // e.g., "#5FH"
-
-        // Convert immediate data with "H" suffix to hexadecimal
-        if (operand2 && operand2.endsWith("H")) {
-            operand2 = operand2.slice(0, -1); // Remove "H"
-        }
+        const mnemonic = match[1].trim(); // e.g., "INC"
+        const operand = match[2] ? match[2].trim() : null; // e.g., "DPTR" or null
 
         console.log('Mnemonic:', mnemonic);
-        console.log('Operands:', operand1, operand2);
+        console.log('Operand:', operand);
 
         for (let key in opcodeTable) {
             const opcodeEntry = opcodeTable[key];
 
             if (opcodeEntry.mnemonic.trim() === mnemonic) {
-                // Check operands
-                const expectedOperands = opcodeEntry.operands.split(", ").map(op => op.trim());
-                if (
-                    expectedOperands[0] === operand1 &&
-                    (expectedOperands[1] === "#data" || expectedOperands[1] === operand2)
-                ) {
-                    if (operand2 && operand2.startsWith("#")) {
-                        // Handle immediate data case
-                        const immediateData = parseInt(operand2.slice(1), 16); // Convert #5F to hexadecimal
-                        if (!isNaN(immediateData)) {
-                            result = `result = ${inputStr} = ${key}${immediateData.toString(16).toUpperCase().padStart(2, '0')}`;
-                            details = `Hex Code : ${key}
-Number of Bytes : 2
+                // Handle cases with or without operands
+                if (!operand && !opcodeEntry.operands) {
+                    // No operand required
+                    result = `result = ${inputStr} = ${key}`;
+                    details = `Hex Code : ${key}
+Number of Bytes : ${opcodeEntry.number_of_bytes || 1}
+Mnemonic : ${opcodeEntry.mnemonic}
+Operands : None`;
+                    break;
+                } else if (operand && opcodeEntry.operands && opcodeEntry.operands.trim() === operand) {
+                    // Operand matches
+                    result = `result = ${inputStr} = ${key}`;
+                    details = `Hex Code : ${key}
+Number of Bytes : ${opcodeEntry.number_of_bytes || 1}
 Mnemonic : ${opcodeEntry.mnemonic}
 Operands : ${opcodeEntry.operands}`;
-                        } else {
-                            result = "Invalid operand. Please use valid hexadecimal values.";
-                        }
-                    } else {
-                        result = `result = ${inputStr} = ${key}`;
-                        details = `Hex Code : ${key}
-Number of Bytes : 1
-Mnemonic : ${opcodeEntry.mnemonic}
-Operands : ${opcodeEntry.operands}`;
-                    }
                     break;
                 }
             }
         }
     }
 
+    if (!result) {
+        result = "No match found";
+    }
+
     document.getElementById("opcodeResult").innerText = `${details}\n${result}`;
 }
+
 
         function calculateOffset(address1, address2) {
             const addr1 = parseInt(address1, 16);
