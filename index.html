@@ -156,8 +156,8 @@
 Number of Bytes : ${byteCount}
 Mnemonic : ${opcodeEntry.mnemonic}
 Operands : ${opcodeEntry.operands}`;
-                    } else {
-                        // Multi-byte operand
+                    } else if (immediateData <= 0xFFFF) {
+                        // Multi-byte operand (2 bytes)
                         const highByte = ((immediateData >> 8) & 0xFF).toString(16).toUpperCase().padStart(2, '0');
                         const lowByte = (immediateData & 0xFF).toString(16).toUpperCase().padStart(2, '0');
                         result = `result = ${inputStr} = ${key}${highByte} ${key}${lowByte}`;
@@ -166,9 +166,11 @@ Operands : ${opcodeEntry.operands}`;
 Number of Bytes : ${byteCount}
 Mnemonic : ${opcodeEntry.mnemonic}
 Operands : ${opcodeEntry.operands}`;
+                    } else {
+                        result = "Operand exceeds valid range (must be <= 0xFFFF).";
                     }
                 } else {
-                    result = "Invalid operand.";
+                    result = "Invalid operand. Please use hexadecimal values.";
                 }
                 break;
             }
