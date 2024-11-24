@@ -128,35 +128,40 @@ document.getElementById("calcResultHexadecimal").innerText = resultValues.hexade
 }
 
     function calculateExecutionTime(instructions, clockFrequency) {
-    const timePerCycle = 1 / clockFrequency; // คำนวณเวลาต่อแมชซีนไซเคิลในหน่วยวินาที
+    const timePerCycle = 1 / clockFrequency; // Calculate time per machine cycle in seconds
     let totalTime = 0;
 
-    instructions.forEach(instruction => {
+    const timeDetails = instructions.map(instruction => {
         const { mnemonic, machineCycles } = instruction;
-        const timeForInstruction = machineCycles * timePerCycle;
+        const timeForInstruction = machineCycles * timePerCycle; // Calculate time for this instruction
         totalTime += timeForInstruction;
 
-        console.log(`คำสั่ง: ${mnemonic}, แมชซีนไซเคิล: ${machineCycles}, เวลา: ${(timeForInstruction * 1e6).toFixed(3)} µs`);
+        return `Instruction: ${mnemonic}, Cycles: ${machineCycles}, Time: ${(timeForInstruction * 1e6).toFixed(3)} µs`;
     });
 
-    console.log(`เวลาทั้งหมด: ${(totalTime * 1e6).toFixed(3)} µs`);
-    return totalTime * 1e6; // คืนค่าเป็นไมโครวินาที
+    const totalTimeInMicroseconds = totalTime * 1e6; // Convert total time to microseconds
+    const timeSummary = `Total Execution Time: ${(totalTimeInMicroseconds).toFixed(3)} µs`;
+
+    return {
+        timeDetails,
+        timeSummary
+    };
 }
 
-// ตัวอย่างการเรียกใช้ฟังก์ชัน
-const clockFrequency = 11.0592e6; // 11.0592 MHz
-const instructions = [
-    { mnemonic: "MOV R3,#55", machineCycles: 1 },
-    { mnemonic: "DEC R3", machineCycles: 1 },
-    { mnemonic: "DJNZ R2,target", machineCycles: 2 },
-    { mnemonic: "LJMP", machineCycles: 2 },
-    { mnemonic: "SJMP", machineCycles: 2 },
-    { mnemonic: "NOP", machineCycles: 1 },
-    { mnemonic: "MUL AB", machineCycles: 4 }
-];
+function calculateExecutionTimeUI() {
+    const clockFrequency = parseFloat(document.getElementById("clockFrequency").value); // Get clock frequency in Hz
+    const instructionsInput = document.getElementById("instructionsInput").value;
 
-const totalExecutionTime = calculateExecutionTime(instructions, clockFrequency);
-console.log(`เวลาการทำงานรวมของโปรแกรม: ${totalExecutionTime.toFixed(3)} µs`);
+    try {
+        const instructions = JSON.parse(instructionsInput); // Parse JSON input
+        const { timeDetails, timeSummary } = calculateExecutionTime(instructions, clockFrequency);
+
+        // Display results
+        document.getElementById("executionTimeResult").innerText = `${timeDetails.join("\n")}\n\n${timeSummary}`;
+    } catch (error) {
+        document.getElementById("executionTimeResult").innerText = `Error: Invalid JSON format or input!`;
+    }
+}
 
 function searchOpcode() {
     const inputStr = document.getElementById("opcodeInput").value.trim().toUpperCase();
@@ -239,7 +244,6 @@ return offset;
     const pswFlags = {
         CY: false, // Carry Flag
         AC: false, // Auxiliary Carry Flag
-        F0: false, // User-defined Flag
         OV: false, // Overflow Flag
         P: false   // Parity Flag
     };
@@ -266,7 +270,7 @@ return offset;
     // Update Overflow Flag (OV)
     pswFlags.OV = (result & 0x8000) !== 0; // Check if the sign bit is set
 
-    // Update Parity Flag (P) - Number of 1 bits in the result
+    // Update Parity Flag (P) - Count number of 1 bits in the result
     pswFlags.P = (result.toString(2).split('1').length - 1) % 2 === 0;
 
     // Format result in hexadecimal
@@ -279,7 +283,19 @@ return offset;
     };
 }
 
-// Example integration in addSubtractAddress
+function calculatePSWFlagsUI() {
+    const address1 = document.getElementById("pswAddress1").value.trim();
+    const address2 = document.getElementById("pswAddress2").value.trim();
+    const operation = document.getElementById("pswOperation").value;
+
+    const { result, flags } = calculatePSWFlags(address1, address2, operation);
+
+    // Display result and flags
+    let flagDetails = `Flags:\nCarry (CY): ${flags.CY}\nAuxiliary Carry (AC): ${flags.AC}\nOverflow (OV): ${flags.OV}\nParity (P): ${flags.P}\n`;
+    document.getElementById("pswFlagsResult").innerText = `Result: ${result}\n${flagDetails}`;
+}
+
+
 function addSubtractAddress() {
     const address1 = document.getElementById("address1").value.trim();
     const address2 = document.getElementById("address2").value.trim();
@@ -292,14 +308,6 @@ function addSubtractAddress() {
     document.getElementById("addressResult").innerText = `Result: ${result}\n${flagDetails}`;
 }
 
-
-// Disable right-click and certain key combinations
-document.addEventListener('contextmenu', event => event.preventDefault());
-document.addEventListener('keydown', function(event) {
-if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === 'I') || (event.ctrlKey && event.key === 'U')) {
-event.preventDefault();
-}
-});
 </script>
 </head>
 <body>
@@ -407,6 +415,52 @@ event.preventDefault();
 </div>
 </div>
 </div>
+    <!-- Section for PSW Flags Calculator -->
+<div class="card">
+    <div class="card-header">PSW Flags Calculator</div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="pswAddress1" class="form-label">Enter Address 1 (Hex):</label>
+            <input type="text" id="pswAddress1" class="form-control" placeholder="Enter first address (hexadecimal)">
+        </div>
+        <div class="mb-3">
+            <label for="pswAddress2" class="form-label">Enter Address 2 (Hex):</label>
+            <input type="text" id="pswAddress2" class="form-control" placeholder="Enter second address (hexadecimal)">
+        </div>
+        <div class="mb-3">
+            <select id="pswOperation" class="form-select">
+                <option value="add">Add</option>
+                <option value="subtract">Subtract</option>
+            </select>
+        </div>
+        <button onclick="calculatePSWFlagsUI()" class="btn btn-primary w-100">Calculate PSW Flags</button>
+        <div class="result-group mt-3">
+            <h5>PSW Flags Result:</h5>
+            <pre id="pswFlagsResult"></pre>
+        </div>
+    </div>
+</div>
+
+    <!-- Section for Execution Time Calculator -->
+<div class="card">
+    <div class="card-header">Execution Time Calculator</div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="clockFrequency" class="form-label">Clock Frequency (Hz):</label>
+            <input type="number" id="clockFrequency" class="form-control" placeholder="e.g., 11059200 for 11.0592 MHz">
+        </div>
+        <div class="mb-3">
+            <label for="instructionsInput" class="form-label">Instructions (JSON Format):</label>
+            <textarea id="instructionsInput" class="form-control" rows="5" placeholder='[{"mnemonic":"MOV R3,#55","machineCycles":1},...]'></textarea>
+        </div>
+        <button onclick="calculateExecutionTimeUI()" class="btn btn-primary w-100">Calculate Execution Time</button>
+        <div class="result-group mt-3">
+            <h5>Execution Time Result:</h5>
+            <pre id="executionTimeResult"></pre>
+        </div>
+    </div>
+</div>
+
 </div>
 </body>
 </html>
