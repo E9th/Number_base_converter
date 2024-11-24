@@ -67,6 +67,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         
+        document.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            alert('Right-click is disabled!');
+        });
+
+        // ป้องกันการกด F12
+        document.addEventListener('keydown', (event) => {
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+                event.preventDefault();
+                alert('DevTools is disabled!');
+            }
+        });
+
+        // ป้องกันการใช้ Ctrl+Shift+C หรือ Ctrl+Shift+J
+        document.addEventListener('keydown', (event) => {
+            if ((event.ctrlKey && event.shiftKey && (event.key === "C" || event.key === "J")) || 
+                (event.ctrlKey && event.key === "U")) { // ป้องกัน View Source
+                event.preventDefault();
+                alert('อย่าเล่นตุกติก!');
+            }
+        });
         let opcodeTable = {};
 
         document.addEventListener('DOMContentLoaded', async function () {
