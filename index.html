@@ -132,77 +132,45 @@
     let result = "";
     let details = "";
 
-    // Match input pattern with or without immediate data
-    const match = inputStr.match(/(\w+)\s+(\w+)?(?:,?\s*(#?\w+))?/);
+    // Match input pattern for mnemonic and operand(s)
+    const match = inputStr.match(/(\w+)\s+(\w+)/); // Capture mnemonic and operand
     if (match) {
-        const mnemonic = match[1].trim(); // e.g., "ADD"
-        const operand1 = match[2] ? match[2].trim() : null; // e.g., "A"
-        const operand2 = match[3] ? match[3].trim() : null; // e.g., "#4567" or null
+        const mnemonic = match[1].trim(); // e.g., "JNC"
+        const operand = match[2].trim(); // e.g., "56" or "5678"
 
         console.log('Mnemonic:', mnemonic);
-        console.log('Operands:', operand1, operand2);
+        console.log('Operand:', operand);
 
-        // Search for matching opcode in the table
         for (let key in opcodeTable) {
             const opcodeEntry = opcodeTable[key];
-            
-            // Match mnemonic
-            if (opcodeEntry.mnemonic.trim() === mnemonic) {
-                
-                // Handle cases with operands
-                if (opcodeEntry.operands) {
-                    const expectedOperands = opcodeEntry.operands.split(", ").map(op => op.trim());
-                    
-                    // Check if operands match
-                    if (expectedOperands.length === 1 && expectedOperands[0] === "code addr") {
-                        // For single operand like "code addr"
-                        result = `result = ${inputStr} = ${key}`;
+
+            if (opcodeEntry.mnemonic.trim() === mnemonic && opcodeEntry.operands === "code addr") {
+                // Handle immediate data
+                const immediateData = parseInt(operand, 16);
+                if (!isNaN(immediateData)) {
+                    if (immediateData <= 0xFF) {
+                        // Single-byte operand
+                        result = `result = ${inputStr} = ${key}${immediateData.toString(16).toUpperCase().padStart(2, '0')}`;
+                        const byteCount = 2; // 1 byte for opcode + 1 byte for operand
                         details = `Hex Code : ${key}
-Number of Bytes : ${opcodeEntry.number_of_bytes}
-Mnemonic : ${opcodeEntry.mnemonic}
-Operands : ${opcodeEntry.operands}`;
-                        break;
-                    } else if (operand1 && expectedOperands.includes(operand1)) {
-                        if (operand2 && operand2.startsWith("#")) {
-                            // Handle immediate data case
-                            const immediateData = parseInt(operand2.slice(1), 16);
-                            if (immediateData <= 0xFF) {
-                                result = `result = ${inputStr} = ${key}${immediateData.toString(16).toUpperCase().padStart(2, '0')}`;
-                                const byteCount = opcodeEntry.number_of_bytes;
-                                details = `Hex Code : ${key}
 Number of Bytes : ${byteCount}
 Mnemonic : ${opcodeEntry.mnemonic}
 Operands : ${opcodeEntry.operands}`;
-                            } else {
-                                const highByte = ((immediateData >> 8) & 0xFF).toString(16).toUpperCase().padStart(2, '0');
-                                const lowByte = (immediateData & 0xFF).toString(16).toUpperCase().padStart(2, '0');
-                                result = `result = ${inputStr} = ${key}${highByte} ${key}${lowByte}`;
-                                const byteCount = opcodeEntry.number_of_bytes + 1;
-                                details = `Hex Code : ${key}
+                    } else {
+                        // Multi-byte operand
+                        const highByte = ((immediateData >> 8) & 0xFF).toString(16).toUpperCase().padStart(2, '0');
+                        const lowByte = (immediateData & 0xFF).toString(16).toUpperCase().padStart(2, '0');
+                        result = `result = ${inputStr} = ${key}${highByte} ${key}${lowByte}`;
+                        const byteCount = 4; // 1 byte for opcode + 2 bytes for operand
+                        details = `Hex Code : ${key}
 Number of Bytes : ${byteCount}
 Mnemonic : ${opcodeEntry.mnemonic}
 Operands : ${opcodeEntry.operands}`;
-                            }
-                        } else if (!operand2) {
-                            // Handle single operand
-                            result = `result = ${inputStr} = ${key}`;
-                            const byteCount = opcodeEntry.number_of_bytes;
-                            details = `Hex Code : ${key}
-Number of Bytes : ${byteCount}
-Mnemonic : ${opcodeEntry.mnemonic}
-Operands : ${opcodeEntry.operands}`;
-                        }
-                        break;
                     }
                 } else {
-                    // Handle cases without operands
-                    result = `result = ${inputStr} = ${key}`;
-                    details = `Hex Code : ${key}
-Number of Bytes : ${opcodeEntry.number_of_bytes}
-Mnemonic : ${opcodeEntry.mnemonic}
-Operands : None`;
-                    break;
+                    result = "Invalid operand.";
                 }
+                break;
             }
         }
     }
