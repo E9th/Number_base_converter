@@ -66,6 +66,7 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        
         let opcodeTable = {};
 
         document.addEventListener('DOMContentLoaded', async function () {
@@ -81,51 +82,82 @@
             }
         });
 
-        function convertNumber() {
-            const number = document.getElementById("number").value;
-            const base = parseInt(document.getElementById("base").value);
-            
-            let convertedValues = {
-                binary: parseInt(number, base).toString(2),
-                octal: parseInt(number, base).toString(8),
-                decimal: parseInt(number, base).toString(10),
-                hexadecimal: parseInt(number, base).toString(16).toUpperCase()
+        ffunction convertNumber() {
+        const number = document.getElementById("number").value.trim();
+        const base = parseInt(document.getElementById("base").value);
+
+        if (!/^[0-9A-Fa-f]+$/.test(number)) {
+            alert("Please enter a valid number that matches the selected base.");
+            return;
+        }
+
+        try {
+            const parsedNumber = parseInt(number, base);
+            if (isNaN(parsedNumber)) {
+                alert("Invalid number for the selected base.");
+                return;
+            }
+
+            const convertedValues = {
+                binary: parsedNumber.toString(2),
+                octal: parsedNumber.toString(8),
+                decimal: parsedNumber.toString(10),
+                hexadecimal: parsedNumber.toString(16).toUpperCase(),
             };
 
             document.getElementById("resultBinary").innerText = convertedValues.binary;
             document.getElementById("resultOctal").innerText = convertedValues.octal;
             document.getElementById("resultDecimal").innerText = convertedValues.decimal;
             document.getElementById("resultHexadecimal").innerText = convertedValues.hexadecimal;
+        } catch (error) {
+            alert("An error occurred while converting the number.");
         }
+    }
 
         function calculate(operation) {
-            const number1 = parseInt(document.getElementById("number1").value, parseInt(document.getElementById("base1").value));
-            const number2 = parseInt(document.getElementById("number2").value, parseInt(document.getElementById("base2").value));
-            let result;
+        const number1 = parseInt(document.getElementById("number1").value, parseInt(document.getElementById("base1").value));
+        const number2 = parseInt(document.getElementById("number2").value, parseInt(document.getElementById("base2").value));
 
-            switch (operation) {
-                case 'add':
-                    result = number1 + number2;
-                    break;
-                case 'subtract':
-                    result = number1 - number2;
-                    break;
-                default:
-                    result = "Invalid Operation";
-            }
-
-            let resultValues = {
-                binary: result.toString(2),
-                octal: result.toString(8),
-                decimal: result.toString(10),
-                hexadecimal: result.toString(16).toUpperCase()
-            };
-
-            document.getElementById("calcResultBinary").innerText = resultValues.binary;
-            document.getElementById("calcResultOctal").innerText = resultValues.octal;
-            document.getElementById("calcResultDecimal").innerText = resultValues.decimal;
-            document.getElementById("calcResultHexadecimal").innerText = resultValues.hexadecimal;
+        if (isNaN(number1) || isNaN(number2)) {
+            alert("Please enter valid numbers for both inputs.");
+            return;
         }
+
+        let result;
+        switch (operation) {
+            case 'add':
+                result = number1 + number2;
+                break;
+            case 'subtract':
+                result = number1 - number2;
+                break;
+            case 'multiply':
+                result = number1 * number2;
+                break;
+            case 'divide':
+                if (number2 === 0) {
+                    alert("Division by zero is not allowed.");
+                    return;
+                }
+                result = Math.floor(number1 / number2);
+                break;
+            default:
+                alert("Invalid operation selected.");
+                return;
+        }
+
+        const resultValues = {
+            binary: result.toString(2),
+            octal: result.toString(8),
+            decimal: result.toString(10),
+            hexadecimal: result.toString(16).toUpperCase(),
+        };
+
+        document.getElementById("calcResultBinary").innerText = resultValues.binary;
+        document.getElementById("calcResultOctal").innerText = resultValues.octal;
+        document.getElementById("calcResultDecimal").innerText = resultValues.decimal;
+        document.getElementById("calcResultHexadecimal").innerText = resultValues.hexadecimal;
+    }
 
         function searchOpcode() {
             const inputStr = document.getElementById("opcodeInput").value.trim().toUpperCase();
@@ -200,27 +232,29 @@ Operands : ${opcodeTable[key].operands}`;
         }
 
         function addSubtractAddress() {
-            const address1 = document.getElementById("address1").value.trim();
-            const address2 = document.getElementById("address2").value.trim();
-            const operation = document.getElementById("addressOperation").value;
-            let result = "";
+        const address1 = parseInt(document.getElementById("address1").value.trim(), 16);
+        const address2 = parseInt(document.getElementById("address2").value.trim(), 16);
+        const operation = document.getElementById("addressOperation").value;
 
-            if (operation === 'add') {
-                result = (parseInt(address1, 16) + parseInt(address2, 16)).toString(16).toUpperCase();
-            } else if (operation === 'subtract') {
-                result = calculateOffset(address1, address2);
-            }
-
-            document.getElementById("addressResult").innerText = `Result: ${result}`;
+        if (isNaN(address1) || isNaN(address2) || address1 > 0xFFFF || address2 > 0xFFFF) {
+            alert("Please enter valid hexadecimal addresses within range (0x0000 - 0xFFFF).");
+            return;
         }
 
-        // Disable right-click and certain key combinations
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === 'I') || (event.ctrlKey && event.key === 'U')) {
-                event.preventDefault();
-            }
-        });
+        let result;
+
+        if (operation === 'add') {
+            result = (address1 + address2) & 0xFFFF;
+        } else if (operation === 'subtract') {
+            result = (address1 - address2 + 0x10000) & 0xFFFF;
+        } else {
+            alert("Invalid operation selected.");
+            return;
+        }
+
+        document.getElementById("addressResult").innerText = `Result: ${result.toString(16).toUpperCase()}`;
+    }
+        
     </script>
 </head>
 <body>
