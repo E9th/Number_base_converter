@@ -381,6 +381,75 @@ function calculatePSWFlagsUI() {
     document.getElementById("pswFlagsResult").innerText = `Result: ${result}\n${flagDetails}`;
 }
 
+// 1. Logical Operations
+function testLogicalOperation() {
+    const A = parseInt(document.getElementById("inputA").value, 16);
+    const B = parseInt(document.getElementById("inputB").value, 16);
+    const operation = document.getElementById("logicalOperation").value;
+
+    const result = performLogicalOperation(A, B, operation);
+    document.getElementById("logicalResult").innerText = `Result: ${result.toString(16).toUpperCase()}`;
+}
+
+// 2. Swap Nibbles
+function testSwapNibbles() {
+    const byte = parseInt(document.getElementById("inputByte").value, 16);
+    const result = swapNibbles(byte);
+    document.getElementById("swapResult").innerText = `Swapped Byte: ${result.toString(16).toUpperCase()}`;
+}
+
+// 3. Packed BCD to ASCII
+function testPackedBCDToASCII() {
+    const packedBCDInput = document.getElementById("inputPackedBCD").value.split(",");
+    const packedBCD = packedBCDInput.map(value => parseInt(value, 16));
+    const result = packedBCDToASCII(packedBCD);
+    document.getElementById("packedBCDResult").innerText = `ASCII: ${result}`;
+}
+
+// 4. ASCII to Packed BCD
+function testASCIIToPackedBCD() {
+    const ascii = document.getElementById("inputASCII").value;
+    const result = asciiToPackedBCD(ascii);
+    const hexResult = result.map(byte => byte.toString(16).toUpperCase()).join(", ");
+    document.getElementById("asciiToBCDResult").innerText = `Packed BCD: ${hexResult}`;
+}
+// Logical Operations
+function performLogicalOperation(A, B, operation) {
+    switch (operation) {
+        case "ANL": return A & B;
+        case "ORL": return A | B;
+        case "XRL": return A ^ B;
+        default: return "Invalid operation";
+    }
+}
+
+// Swap Nibbles
+function swapNibbles(byte) {
+    const highNibble = (byte & 0xF0) >> 4;
+    const lowNibble = (byte & 0x0F);
+    return (lowNibble << 4) | highNibble;
+}
+
+// Packed BCD to ASCII
+function packedBCDToASCII(packedBCD) {
+    const ascii = [];
+    for (let byte of packedBCD) {
+        ascii.push(((byte & 0xF0) >> 4).toString());
+        ascii.push((byte & 0x0F).toString());
+    }
+    return ascii.join("");
+}
+
+// ASCII to Packed BCD
+function asciiToPackedBCD(ascii) {
+    const packedBCD = [];
+    for (let i = 0; i < ascii.length; i += 2) {
+        const highNibble = parseInt(ascii[i]) << 4;
+        const lowNibble = parseInt(ascii[i + 1]);
+        packedBCD.push(highNibble | lowNibble);
+    }
+    return packedBCD;
+}
 
 function addSubtractAddress() {
     const address1 = document.getElementById("address1").value.trim();
@@ -393,6 +462,75 @@ function addSubtractAddress() {
     let flagDetails = `Flags:\nCarry (CY): ${flags.CY}\nAuxiliary Carry (AC): ${flags.AC}\nOverflow (OV): ${flags.OV}\nParity (P): ${flags.P}\n`;
     document.getElementById("addressResult").innerText = `Result: ${result}\n${flagDetails}`;
 }
+
+    async function loadOpcodeTable() {
+  try {
+    const response = await fetch('opcodeTable.json'); // Path to your opcodeTable.json file
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error('Error loading opcode table:', error);
+    return {};
+  }
+}
+
+let opcodeTable = {};
+
+// Load opcode table on page load
+document.addEventListener('DOMContentLoaded', async () => {
+  opcodeTable = await loadOpcodeTable();
+});
+
+function convertAssemblyToMachineCode() {
+  const inputCode = document.getElementById("assemblyInput").value.trim().split("\n");
+  let output = "Address | Assembly Code          | Machine Code\n";
+  output += "--------|------------------------|----------------\n";
+
+  let currentAddress = 0x8000; // Example starting address
+
+  inputCode.forEach((line) => {
+    const inputStr = line.trim().toUpperCase();
+    let machineCode = "No match"; // Default if no match is found
+
+    const match = inputStr.match(/(\w+)\s+(\w+),?\s*(#?\w+H?)/);
+    if (match) {
+      const mnemonic = match[1].trim();
+      const operand1 = match[2].trim();
+      let operand2 = match[3] ? match[3].trim() : null;
+
+      if (operand2 && operand2.endsWith("H")) {
+        operand2 = operand2.slice(0, -1);
+      }
+
+      for (let key in opcodeTable) {
+        const opcodeEntry = opcodeTable[key];
+        if (opcodeEntry.mnemonic.trim() === mnemonic) {
+          const expectedOperands = opcodeEntry.operands.split(", ").map(op => op.trim());
+          if (
+            expectedOperands[0] === operand1 &&
+            (expectedOperands[1] === "#data" || (operand2 && operand2.startsWith("#")))
+          ) {
+            if (operand2 && operand2.startsWith("#")) {
+              const immediateData = parseInt(operand2.slice(1), 16);
+              if (!isNaN(immediateData)) {
+                machineCode = `${key}${immediateData.toString(16).toUpperCase().padStart(2, '0')}`;
+              }
+            } else {
+              machineCode = key;
+            }
+            break;
+          }
+        }
+      }
+    }
+
+    output += `${currentAddress.toString(16).toUpperCase().padStart(4, '0')} | ${inputStr.padEnd(22, ' ')} | ${machineCode}\n`;
+    currentAddress += (machineCode.length / 2); // Increment address (example)
+  });
+
+  document.getElementById("outputResult").textContent = output;
+}
+
 
 </script>
 </head>
@@ -551,6 +689,65 @@ function addSubtractAddress() {
         </div>
     </div>
 </div>
+
+    <div class="card">
+    <div class="card-header">Homework Functions Tester</div>
+    <div class="card-body">
+        <!-- Input for Logical Operations -->
+        <h5>1. Logical Operations (AND, OR, XOR)</h5>
+        <div class="mb-3">
+            <input type="text" id="inputA" class="form-control" placeholder="Enter A (Hexadecimal)">
+            <input type="text" id="inputB" class="form-control mt-2" placeholder="Enter B (Hexadecimal)">
+            <select id="logicalOperation" class="form-select mt-2">
+                <option value="ANL">AND</option>
+                <option value="ORL">OR</option>
+                <option value="XRL">XOR</option>
+            </select>
+            <button onclick="testLogicalOperation()" class="btn btn-primary mt-2">Test Logical Operation</button>
+            <pre id="logicalResult"></pre>
+        </div>
+
+        <!-- Input for SWAP Operation -->
+        <h5>2. Swap Nibbles</h5>
+        <div class="mb-3">
+            <input type="text" id="inputByte" class="form-control" placeholder="Enter Byte (Hexadecimal)">
+            <button onclick="testSwapNibbles()" class="btn btn-primary mt-2">Test Swap</button>
+            <pre id="swapResult"></pre>
+        </div>
+
+        <!-- Input for Packed BCD Conversion -->
+        <h5>3. Packed BCD to ASCII</h5>
+        <div class="mb-3">
+            <input type="text" id="inputPackedBCD" class="form-control" placeholder="Enter Packed BCD (comma-separated Hex)">
+            <button onclick="testPackedBCDToASCII()" class="btn btn-primary mt-2">Convert to ASCII</button>
+            <pre id="packedBCDResult"></pre>
+        </div>
+
+        <!-- Input for ASCII to Packed BCD -->
+        <h5>4. ASCII to Packed BCD</h5>
+        <div class="mb-3">
+            <input type="text" id="inputASCII" class="form-control" placeholder="Enter ASCII Digits">
+            <button onclick="testASCIIToPackedBCD()" class="btn btn-primary mt-2">Convert to Packed BCD</button>
+            <pre id="asciiToBCDResult"></pre>
+        </div>
+    </div>
+</div>
+
+    <div class="card">
+  <div class="card-header">Assembly to Machine Code Converter</div>
+  <div class="card-body">
+    <div class="mb-3">
+      <label for="assemblyInput" class="form-label">Enter Assembly Code (one instruction per line):</label>
+      <textarea id="assemblyInput" class="form-control" rows="10" placeholder="Example: MOV A,#20H"></textarea>
+    </div>
+    <button onclick="convertAssemblyToMachineCode()" class="btn btn-primary w-100">Convert</button>
+    <h5 class="mt-4">Output:</h5>
+    <pre id="outputResult"></pre>
+  </div>
+</div>
+
+    
+
 
 </div>
 </body>
