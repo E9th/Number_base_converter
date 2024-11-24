@@ -81,22 +81,52 @@ console.error('Error loading opcode table:', error);
 }
 });
 
-function convertNumber() {
-const number = document.getElementById("number").value;
-const base = parseInt(document.getElementById("base").value);
-
-let convertedValues = {
-binary: parseInt(number, base).toString(2),
-octal: parseInt(number, base).toString(8),
-decimal: parseInt(number, base).toString(10),
-hexadecimal: parseInt(number, base).toString(16).toUpperCase()
-};
-
-document.getElementById("resultBinary").innerText = convertedValues.binary;
-document.getElementById("resultOctal").innerText = convertedValues.octal;
-document.getElementById("resultDecimal").innerText = convertedValues.decimal;
-document.getElementById("resultHexadecimal").innerText = convertedValues.hexadecimal;
+// ฟังก์ชันแปลงเลขฐาน 10 เป็น BCD
+function toBCD(number) {
+    const digits = number.split('').map(digit => {
+        const binary = parseInt(digit, 10).toString(2);
+        return binary.padStart(4, '0'); // เติม 0 จนครบ 4 บิต
+    });
+    return digits.join(' '); // รวม BCD ของแต่ละหลัก
 }
+
+// ปรับปรุงฟังก์ชัน convertNumber ให้รองรับ BCD
+function convertNumber() {
+    const number = document.getElementById("number").value.trim();
+    const base = parseInt(document.getElementById("base").value);
+
+    try {
+        const decimalValue = parseInt(number, base); // แปลงเลขเป็นฐาน 10
+        if (isNaN(decimalValue)) {
+            throw new Error("Invalid number format!");
+        }
+
+        let convertedValues = {
+            binary: decimalValue.toString(2),
+            octal: decimalValue.toString(8),
+            decimal: decimalValue.toString(10),
+            hexadecimal: decimalValue.toString(16).toUpperCase(),
+            bcd: toBCD(decimalValue.toString()) // เพิ่มผลลัพธ์ BCD
+        };
+
+        // แสดงผลลัพธ์ใน UI
+        document.getElementById("resultBinary").innerText = convertedValues.binary;
+        document.getElementById("resultOctal").innerText = convertedValues.octal;
+        document.getElementById("resultDecimal").innerText = convertedValues.decimal;
+        document.getElementById("resultHexadecimal").innerText = convertedValues.hexadecimal;
+        document.getElementById("resultBCD").innerText = convertedValues.bcd;
+
+    } catch (error) {
+        // กรณีข้อผิดพลาด เช่น อินพุตไม่ถูกต้อง
+        document.getElementById("resultBinary").innerText = "Error";
+        document.getElementById("resultOctal").innerText = "Error";
+        document.getElementById("resultDecimal").innerText = "Error";
+        document.getElementById("resultHexadecimal").innerText = "Error";
+        document.getElementById("resultBCD").innerText = "Error";
+        console.error("Conversion Error:", error.message);
+    }
+}
+
 
 function calculate(operation) {
 const number1 = parseInt(document.getElementById("number1").value, parseInt(document.getElementById("base1").value));
@@ -314,27 +344,28 @@ function addSubtractAddress() {
 <div class="container">
 <!-- Section for Number Base Converter -->
 <div class="card">
-<div class="card-header">Number Base Converter</div>
-<div class="card-body">
-<div class="mb-3">
-<label for="number" class="form-label">Enter a number and select its base to convert:</label>
-<input type="text" id="number" class="form-control" placeholder="Enter number">
-<select id="base" class="form-select mt-2">
-<option value="2">Binary</option>
-<option value="8">Octal</option>
-<option value="10">Decimal</option>
-<option value="16">Hexadecimal</option>
-</select>
-</div>
-<button onclick="convertNumber()" class="btn btn-primary w-100">Convert</button>
-<div class="result-group mt-3">
-<h5>Converted Values:</h5>
-<p><span class="result-label">Binary:</span> <span id="resultBinary"></span></p>
-<p><span class="result-label">Octal:</span> <span id="resultOctal"></span></p>
-<p><span class="result-label">Decimal:</span> <span id="resultDecimal"></span></p>
-<p><span class="result-label">Hexadecimal:</span> <span id="resultHexadecimal"></span></p>
-</div>
-</div>
+    <div class="card-header">Number Base Converter</div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="number" class="form-label">Enter a number and select its base to convert:</label>
+            <input type="text" id="number" class="form-control" placeholder="Enter number">
+            <select id="base" class="form-select mt-2">
+                <option value="2">Binary</option>
+                <option value="8">Octal</option>
+                <option value="10">Decimal</option>
+                <option value="16">Hexadecimal</option>
+            </select>
+        </div>
+        <button onclick="convertNumber()" class="btn btn-primary w-100">Convert</button>
+        <div class="result-group mt-3">
+            <h5>Converted Values:</h5>
+            <p><span class="result-label">Binary:</span> <span id="resultBinary"></span></p>
+            <p><span class="result-label">Octal:</span> <span id="resultOctal"></span></p>
+            <p><span class="result-label">Decimal:</span> <span id="resultDecimal"></span></p>
+            <p><span class="result-label">Hexadecimal:</span> <span id="resultHexadecimal"></span></p>
+            <p><span class="result-label">BCD:</span> <span id="resultBCD"></span></p> <!-- เพิ่มส่วนแสดงผล BCD -->
+        </div>
+    </div>
 </div>
 
 <!-- Section for Number Base Calculator -->
