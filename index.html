@@ -69,20 +69,16 @@ overflow-x: auto;
 let opcodeTable = {};
 
 document.addEventListener('DOMContentLoaded', async function () {
-try {
-const response = await fetch('https://E9th.github.io/Number_base_converter/opcodeTable.json');
-if (!response.ok) {
-throw new Error(HTTP error! Status: ${response.status});
-}
-if (Object.keys(opcodeTable).length === 0) {
-  console.error('Opcode table is empty or failed to load.');
-  return;
-}
-opcodeTable = await response.json();
-console.log('Opcode table loaded successfully:', opcodeTable);
-} catch (error) {
-console.error('Error loading opcode table:', error);
-}
+  try {
+    const response = await fetch('https://E9th.github.io/Number_base_converter/opcodeTable.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`); // Fixed here
+    }
+    opcodeTable = await response.json();
+    console.log('Opcode table loaded successfully:', opcodeTable);
+  } catch (error) {
+    console.error('Error loading opcode table:', error);
+  }
 });
 
     async function loadOpcodeTable() {
