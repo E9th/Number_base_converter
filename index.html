@@ -127,6 +127,37 @@ document.getElementById("calcResultDecimal").innerText = resultValues.decimal;
 document.getElementById("calcResultHexadecimal").innerText = resultValues.hexadecimal;
 }
 
+    function calculateExecutionTime(instructions, clockFrequency) {
+    const timePerCycle = 1 / clockFrequency; // คำนวณเวลาต่อแมชซีนไซเคิลในหน่วยวินาที
+    let totalTime = 0;
+
+    instructions.forEach(instruction => {
+        const { mnemonic, machineCycles } = instruction;
+        const timeForInstruction = machineCycles * timePerCycle;
+        totalTime += timeForInstruction;
+
+        console.log(`คำสั่ง: ${mnemonic}, แมชซีนไซเคิล: ${machineCycles}, เวลา: ${(timeForInstruction * 1e6).toFixed(3)} µs`);
+    });
+
+    console.log(`เวลาทั้งหมด: ${(totalTime * 1e6).toFixed(3)} µs`);
+    return totalTime * 1e6; // คืนค่าเป็นไมโครวินาที
+}
+
+// ตัวอย่างการเรียกใช้ฟังก์ชัน
+const clockFrequency = 11.0592e6; // 11.0592 MHz
+const instructions = [
+    { mnemonic: "MOV R3,#55", machineCycles: 1 },
+    { mnemonic: "DEC R3", machineCycles: 1 },
+    { mnemonic: "DJNZ R2,target", machineCycles: 2 },
+    { mnemonic: "LJMP", machineCycles: 2 },
+    { mnemonic: "SJMP", machineCycles: 2 },
+    { mnemonic: "NOP", machineCycles: 1 },
+    { mnemonic: "MUL AB", machineCycles: 4 }
+];
+
+const totalExecutionTime = calculateExecutionTime(instructions, clockFrequency);
+console.log(`เวลาการทำงานรวมของโปรแกรม: ${totalExecutionTime.toFixed(3)} µs`);
+
 function searchOpcode() {
     const inputStr = document.getElementById("opcodeInput").value.trim().toUpperCase();
     let result = "No match found";
