@@ -132,17 +132,18 @@
     let result = "No match found";
     let details = "";
 
-    // Match input pattern with mnemonic and operands
+    // Match input pattern for mnemonic and operands
     const match = inputStr.match(/(\w+)\s+(\w+),?\s*(#?\w+H?)/); // Capture mnemonic, operand1, operand2
     if (match) {
         const mnemonic = match[1].trim(); // e.g., "MOV"
-        const operand1 = match[2].trim(); // e.g., "R5"
-        let operand2 = match[3] ? match[3].trim() : null; // e.g., "#25H"
+        const operand1 = match[2].trim(); // e.g., "SP"
+        let operand2 = match[3] ? match[3].trim() : null; // e.g., "#5FH"
 
         // Convert immediate data with "H" suffix to hexadecimal
         if (operand2 && operand2.endsWith("H")) {
             operand2 = operand2.slice(0, -1); // Remove "H"
         }
+
         console.log('Mnemonic:', mnemonic);
         console.log('Operands:', operand1, operand2);
 
@@ -158,7 +159,7 @@
                 ) {
                     if (operand2 && operand2.startsWith("#")) {
                         // Handle immediate data case
-                        const immediateData = parseInt(operand2.slice(1), 16); // Convert #25 to hexadecimal
+                        const immediateData = parseInt(operand2.slice(1), 16); // Convert #5F to hexadecimal
                         if (!isNaN(immediateData)) {
                             result = `result = ${inputStr} = ${key}${immediateData.toString(16).toUpperCase().padStart(2, '0')}`;
                             details = `Hex Code : ${key}
