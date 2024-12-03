@@ -416,11 +416,15 @@ function calculatePSWFlagsUI() {
     const { result, flags } = calculatePSWFlags(address1, address2, operation);
 
     // Display result and flags
-    let flagDetails = Flags:\nCarry (CY): ${flags.CY}\nAuxiliary Carry (AC): ${flags.AC}\nOverflow (OV): ${flags.OV}\nParity (P): ${flags.P}\n;
-    document.getElementById("pswFlagsResult").innerText = Result: ${result}\n${flagDetails};
+    let flagDetails = `Flags:
+Carry (CY): ${flags.CY}
+Auxiliary Carry (AC): ${flags.AC}
+Overflow (OV): ${flags.OV}
+Parity (P): ${flags.P}`;
+
+    document.getElementById("pswFlagsResult").innerText = `Result: ${result}\n${flagDetails}`;
 }
-
-
+    
 function addSubtractAddress() {
     const address1 = document.getElementById("address1").value.trim();
     const address2 = document.getElementById("address2").value.trim();
