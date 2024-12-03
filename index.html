@@ -69,32 +69,30 @@ overflow-x: auto;
 let opcodeTable = {};
 
 document.addEventListener('DOMContentLoaded', async function () {
-  try {
-    const response = await fetch('https://E9th.github.io/Number_base_converter/opcodeTable.json');
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`); // Fixed here
+  async function loadOpcodeTable() {
+    try {
+        const response = await fetch('https://E9th.github.io/Number_base_converter/opcodeTable.json'); // Adjust the path if needed
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        console.error('Error loading opcode table:', error);
+        return {};
     }
-    opcodeTable = await response.json();
-    console.log('Opcode table loaded successfully:', opcodeTable);
-  } catch (error) {
-    console.error('Error loading opcode table:', error);
-  }
+}
+if (Object.keys(opcodeTable).length === 0) {
+    console.error('Opcode table is empty or failed to load.');
+}
 });
 
     async function loadOpcodeTable() {
-  try {
-    const response = await fetch('https://E9th.github.io/Number_base_converter/opcodeTable.json'); // Adjust the path if needed
-    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-    return await response.json();
-  } 
-if (Object.keys(opcodeTable).length === 0) {
-  console.error('Opcode table is empty or failed to load.');
-  return;
-}
-catch (error) {
-    console.error('Error loading opcode table:', error);
-    return {};
-  }
+    try {
+        const response = await fetch('https://E9th.github.io/Number_base_converter/opcodeTable.json');
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        console.error('Error loading opcode table:', error);
+        return {};
+    }
 }
 
 // Load opcode table on page load
@@ -219,7 +217,6 @@ function convertNumber() {
     }
 }
 
-// ฟังก์ชันแปลงเลขฐาน 10 เป็น Packed BCD
 function toPackedBCD(number) {
     const digits = number.split('').map(digit => parseInt(digit, 10));
     let packedBCD = '';
@@ -227,7 +224,7 @@ function toPackedBCD(number) {
     for (let i = 0; i < digits.length; i += 2) {
         let highNibble = digits[i].toString(2).padStart(4, '0');
         let lowNibble = (digits[i + 1] || 0).toString(2).padStart(4, '0');
-        packedBCD += ${highNibble}${lowNibble} ;
+        packedBCD += `${highNibble}${lowNibble}`;
     }
 
     return packedBCD.trim();
@@ -285,19 +282,19 @@ function calculateBaseOperation(operation) {
 }
 
     function calculateExecutionTime(instructions, clockFrequency) {
-    const timePerCycle = 1 / clockFrequency; // Calculate time per machine cycle in seconds
+    const timePerCycle = 1 / clockFrequency;
     let totalTime = 0;
 
     const timeDetails = instructions.map(instruction => {
         const { mnemonic, machineCycles } = instruction;
-        const timeForInstruction = machineCycles * timePerCycle; // Calculate time for this instruction
+        const timeForInstruction = machineCycles * timePerCycle;
         totalTime += timeForInstruction;
 
-        return Instruction: ${mnemonic}, Cycles: ${machineCycles}, Time: ${(timeForInstruction * 1e6).toFixed(3)} µs;
+        return `Instruction: ${mnemonic}, Cycles: ${machineCycles}, Time: ${(timeForInstruction * 1e6).toFixed(3)} µs`;
     });
 
-    const totalTimeInMicroseconds = totalTime * 1e6; // Convert total time to microseconds
-    const timeSummary = Total Execution Time: ${(totalTimeInMicroseconds).toFixed(3)} µs;
+    const totalTimeInMicroseconds = totalTime * 1e6;
+    const timeSummary = `Total Execution Time: ${(totalTimeInMicroseconds).toFixed(3)} µs`;
 
     return {
         timeDetails,
@@ -355,7 +352,7 @@ function searchOpcode() {
                         // Handle immediate data case
                         const immediateData = parseInt(operand2.slice(1), 16); // Convert #25 to hexadecimal
                         if (!isNaN(immediateData)) {
-                            result = result = ${inputStr} = ${key}${immediateData.toString(16).toUpperCase().padStart(2, '0')};
+                            result = `${inputStr} = ${key}${immediateData.toString(16).toUpperCase().padStart(2, '0')}`;
                             details = Hex Code : ${key}
 Number of Bytes : 2
 Mnemonic : ${opcodeEntry.mnemonic}
