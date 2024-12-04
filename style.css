@@ -39,6 +39,7 @@ button {
     width: 100%;
     font-size: 1rem;
     margin-top: 10px;
+    padding: 10px;
 }
 
 .result-group {
@@ -60,6 +61,7 @@ pre {
     overflow-x: auto;
 }
 
+/* Opcodes List */
 #opcodeList {
     display: none;
     margin-top: 10px;
@@ -70,6 +72,38 @@ pre {
     max-height: 400px;
     overflow-y: auto;
     font-size: 0.9rem;
+}
+
+#opcodeList div {
+    margin-bottom: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    line-height: 1.4;
+}
+
+/* Example Program Output */
+#exampleProgramOutput {
+    background-color: #eaf4fc;
+    padding: 15px;
+    border: 1px solid #b6d4fe;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem;
+    overflow-x: auto;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+/* Highlight Simulation Result */
+#simulationResult {
+    background-color: #fefae0;
+    border: 1px solid #f5c100;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    overflow-x: auto;
 }
 
 /* Responsive styles */
@@ -101,6 +135,10 @@ pre {
         font-size: 0.8rem;
         padding: 8px;
     }
+
+    #opcodeList {
+        max-height: 300px;
+    }
 }
 
 /* For medium screens (tablets/iPads) */
@@ -120,6 +158,10 @@ pre {
     .result-group, pre {
         font-size: 0.9rem;
     }
+
+    #opcodeList {
+        max-height: 350px;
+    }
 }
 
 /* For large screens (desktops/laptops) */
@@ -138,5 +180,9 @@ pre {
 
     .result-group, pre {
         font-size: 0.95rem;
+    }
+
+    #opcodeList {
+        max-height: 400px;
     }
 }
