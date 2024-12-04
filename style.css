@@ -1,59 +1,63 @@
+/* General styles for all devices */
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
     padding-top: 20px;
+    margin: 0;
 }
 
 .container {
     max-width: 800px;
     margin: auto;
+    padding: 10px;
 }
 
 .card {
-    margin-bottom: 15px; /* ลดระยะห่างระหว่างแต่ละการ์ด */
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
     background-color: #007bff;
-    color: #fff;
-    font-size: 1.2rem;
-    padding: 10px; /* ลดช่องว่างในหัวข้อ */
+    color: white;
+    font-size: 1.25rem;
+    padding: 10px;
+    text-align: center;
 }
 
 .card-body {
-    padding: 15px; /* ลดช่องว่างในเนื้อหาของการ์ด */
+    padding: 15px;
+}
+
+textarea, input, select {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+button {
+    width: 100%;
+    font-size: 1rem;
+    margin-top: 10px;
 }
 
 .result-group {
     background-color: #e9ecef;
     padding: 10px;
     border-radius: 5px;
-    white-space: pre-wrap;
-    line-height: 1.2; /* ลดระยะห่างระหว่างบรรทัด */
-    font-size: 0.95rem; /* ขนาดฟอนต์เล็กลงเล็กน้อย */
-    margin-top: 10px; /* ลดช่องว่างก่อนเริ่มผลลัพธ์ */
-}
-
-button {
-    margin-right: 5px; /* ระยะห่างระหว่างปุ่ม */
+    line-height: 1.5;
+    font-size: 0.95rem;
+    margin-top: 10px;
+    overflow-x: auto;
 }
 
 pre {
     background-color: #f8f9fa;
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 10px;
     border-radius: 5px;
-    font-size: 0.9rem; /* ขนาดฟอนต์เล็กลง */
-    line-height: 1.2; /* ลดช่องว่างระหว่างบรรทัด */
-}
-
-textarea {
-    margin-bottom: 10px;
-}
-
-.table {
     font-size: 0.9rem;
-    line-height: 1.2; /* ลดช่องว่างในตาราง */
+    overflow-x: auto;
 }
 
 #opcodeList {
@@ -64,7 +68,75 @@ textarea {
     background-color: #f8f9fa;
     border-radius: 5px;
     max-height: 400px;
-    overflow-y: auto; /* Add scroll if the content exceeds height */
-    font-size: 0.9rem; /* Slightly smaller font size */
-    line-height: 1.4; /* Adjust line spacing for readability */
+    overflow-y: auto;
+    font-size: 0.9rem;
+}
+
+/* Responsive styles */
+
+/* For small screens (phones) */
+@media (max-width: 576px) {
+    .container {
+        padding: 5px;
+    }
+
+    .card {
+        margin-bottom: 10px;
+    }
+
+    .card-header {
+        font-size: 1rem;
+        padding: 8px;
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    textarea, input, select, button {
+        font-size: 0.85rem;
+    }
+
+    .result-group, pre {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+}
+
+/* For medium screens (tablets/iPads) */
+@media (min-width: 577px) and (max-width: 768px) {
+    .container {
+        max-width: 90%;
+    }
+
+    .card-header {
+        font-size: 1.1rem;
+    }
+
+    textarea, input, select, button {
+        font-size: 0.95rem;
+    }
+
+    .result-group, pre {
+        font-size: 0.9rem;
+    }
+}
+
+/* For large screens (desktops/laptops) */
+@media (min-width: 769px) {
+    .container {
+        max-width: 800px;
+    }
+
+    .card-header {
+        font-size: 1.25rem;
+    }
+
+    textarea, input, select, button {
+        font-size: 1rem;
+    }
+
+    .result-group, pre {
+        font-size: 0.95rem;
+    }
 }
