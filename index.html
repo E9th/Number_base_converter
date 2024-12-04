@@ -9,10 +9,13 @@
 </head>
 <body>
     <div class="container">
+        <h1 class="text-center mt-3">Assembly Simulator</h1>
+
         <!-- Number Base Converter -->
-        <div class="card">
+        <div class="card mt-3">
             <div class="card-header">Number Base Converter</div>
             <div class="card-body">
+                <p class="text-muted">Convert numbers between Binary, Octal, Decimal, and Hexadecimal.</p>
                 <label for="number" class="form-label">Enter a number:</label>
                 <input type="text" id="number" class="form-control" placeholder="e.g., 25">
                 <label for="base" class="form-label mt-2">Select Base:</label>
@@ -23,6 +26,7 @@
                     <option value="16">Hexadecimal</option>
                 </select>
                 <button class="btn btn-primary mt-3" onclick="convertNumber()">Convert</button>
+                <p class="text-muted mt-3">Example: If input is 25 (Decimal), you'll get its Binary, Octal, and Hexadecimal equivalents.</p>
                 <div class="result-group mt-3">
                     <p><strong>Binary:</strong> <span id="resultBinary"></span></p>
                     <p><strong>Octal:</strong> <span id="resultOctal"></span></p>
@@ -38,7 +42,9 @@
         <div class="card mt-3">
             <div class="card-header">Assembly Simulation</div>
             <div class="card-body">
-                <textarea id="assemblyInput" class="form-control" rows="5" placeholder="Enter assembly code here, e.g., MOV A, #25H"></textarea>
+                <p class="text-muted">Simulate assembly instructions and view their hexadecimal representation.</p>
+                <textarea id="assemblyInput" class="form-control" rows="5" placeholder="Enter assembly code here, e.g., MOV A, #25H\nADD A, #12H"></textarea>
+                <p class="text-muted mt-3">Example: Enter 'MOV A, #25H' to see its opcode representation and address mapping.</p>
                 <div class="d-flex mt-3">
                     <button class="btn btn-primary me-2" onclick="simulateAssembly()">Simulate</button>
                     <button class="btn btn-secondary" onclick="listOpcodes()">View/Hide All Instructions</button>
@@ -52,9 +58,11 @@
         <div class="card mt-3">
             <div class="card-header">Execution Time Calculator</div>
             <div class="card-body">
+                <p class="text-muted">Calculate execution time of instructions based on oscillator frequency.</p>
                 <label for="oscillatorFrequency" class="form-label">Oscillator Frequency (MHz):</label>
-                <input type="number" id="oscillatorFrequency" class="form-control" placeholder="e.g., 1">
+                <input type="number" id="oscillatorFrequency" class="form-control" placeholder="e.g., 12">
                 <textarea id="instructionInput" class="form-control mt-3" rows="5" placeholder="Enter assembly instructions, e.g., MOV A,#25H"></textarea>
+                <p class="text-muted mt-3">Example: Enter frequency as 12 MHz and instructions to calculate execution time.</p>
                 <button class="btn btn-primary mt-3" onclick="calculateExecutionTime()">Calculate</button>
                 <pre id="executionResult" class="result-group mt-3"></pre>
             </div>
@@ -64,6 +72,7 @@
         <div class="card mt-3">
             <div class="card-header">Address Calculator</div>
             <div class="card-body">
+                <p class="text-muted">Perform address addition or subtraction for memory calculations.</p>
                 <label for="address1" class="form-label">Address 1 (Hex):</label>
                 <input type="text" id="address1" class="form-control" placeholder="e.g., 8000">
                 <label for="address2" class="form-label mt-2">Address 2 (Hex):</label>
@@ -74,7 +83,23 @@
                     <option value="subtract">Subtract (e.g., 8000 - 0080)</option>
                 </select>
                 <button class="btn btn-primary mt-3" onclick="addSubtractAddress()">Calculate</button>
+                <p class="text-muted mt-3">Example: Add 8000 and 0080 to calculate resulting address.</p>
                 <pre id="addressResult" class="result-group mt-3"></pre>
+            </div>
+        </div>
+
+        <!-- Instruction Simulation -->
+        <div class="card mt-3">
+            <div class="card-header">Instruction Simulation</div>
+            <div class="card-body">
+                <p class="text-muted">Simulate individual assembly instructions and view their effect on registers.</p>
+                <label for="instructionInput" class="form-label">Enter Instruction:</label>
+                <input type="text" id="instructionInput" class="form-control" placeholder="e.g., SWAP A">
+                <label for="registerInput" class="form-label mt-3">Enter Register Values (optional):</label>
+                <input type="text" id="registerInput" class="form-control" placeholder="e.g., A=56H">
+                <button class="btn btn-primary mt-3" onclick="simulateInstruction()">Simulate</button>
+                <p class="text-muted mt-3">Example: Enter 'SWAP A' with 'A=56H' to see how A is swapped.</p>
+                <pre id="instructionResult" class="result-group mt-3"></pre>
             </div>
         </div>
     </div>
