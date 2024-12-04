@@ -111,30 +111,64 @@ function addSubtractAddress() {
     document.getElementById("addressResult").innerText = `Result: ${result.toString(16).toUpperCase()}`;
 }
 
-function listOpcodes() {
-    const opcodeListDiv = document.getElementById("opcodeList");
+// Execution Time Calculator
+function calculateExecutionTime() {
+    const frequency = parseFloat(document.getElementById("oscillatorFrequency").value) * 1e6;
+    const instructions = document.getElementById("instructionInput").value.trim().split("\n");
+    let totalCycles = 0;
 
-    // Toggle visibility
-    if (opcodeListDiv.style.display === "block") {
-        opcodeListDiv.style.display = "none"; // Close the list if already open
+    instructions.forEach(line => {
+        const mnemonic = line.split(" ")[0].toUpperCase();
+        const data = Object.values(opcodeTable).find(op => op.mnemonic === mnemonic);
+        if (data) totalCycles += data.cycles;
+    });
+
+    const executionTime = totalCycles / frequency;
+    document.getElementById("executionResult").innerText = `Total Cycles: ${totalCycles}\nExecution Time: ${(executionTime * 1e6).toFixed(3)} µs`;
+}
+
+// Read/Write Memory Function
+function readWriteMemory(operation) {
+    const value = document.getElementById("memoryValue").value.trim();
+    const address = document.getElementById("memoryAddress").value.trim();
+
+    if (!value || !address) {
+        alert("Please provide both address and value.");
         return;
     }
 
-    // Start building the list
-    opcodeListDiv.innerHTML = "<strong>Available Instructions:</strong><br>";
-
-    for (const [opcode, data] of Object.entries(opcodeTable)) {
-        opcodeListDiv.innerHTML += `
-            <div style="margin-bottom: 10px; padding: 8px; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
-                <strong>Opcode:</strong> ${opcode}<br>
-                <strong>Mnemonic:</strong> ${data.mnemonic}<br>
-                <strong>Operands:</strong> ${data.operands}<br>
-                <strong>Number of Bytes:</strong> ${data.number_of_bytes}<br>
-                <strong>Cycles:</strong> ${data.cycles}<br>
-                <strong>Type:</strong> ${data.type}<br>
-                <strong>Description:</strong> ${data.description}<br>
-            </div>`;
+    const addr = parseInt(address, 16);
+    if (isNaN(addr)) {
+        alert("Invalid address format.");
+        return;
     }
 
-    opcodeListDiv.style.display = "block"; // Open the list
+    if (operation === "read") {
+        document.getElementById("memoryResult").innerText = `Value at ${address}: Simulated value here`; // Simulate read
+    } else if (operation === "write") {
+        document.getElementById("memoryResult").innerText = `Written ${value} to ${address}`;
+    } else {
+        alert("Invalid operation.");
+    }
+}
+
+// Display Example Programs
+function showExampleProgram(type) {
+    const examples = {
+        packedToAscii: `
+; Convert Packed BCD to ASCII
+MOV A, #45H
+SWAP A
+ANL A, #0FH
+MOV R0, A
+        `,
+        asciiToPacked: `
+; Convert ASCII to Packed BCD
+MOV A, #4AH
+ORL A, #0FH
+MOV R0, A
+        `
+    };
+
+    document.getElementById("exampleProgramOutput").innerText = examples[type] || "No example available.";
 }
