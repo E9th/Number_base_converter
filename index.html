@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembly Simulator</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Number Base Converter -->
+        <div class="card">
+            <div class="card-header">Number Base Converter</div>
+            <div class="card-body">
+                <label for="number" class="form-label">Enter a number:</label>
+                <input type="text" id="number" class="form-control" placeholder="e.g., 25">
+                <label for="base" class="form-label mt-2">Select Base:</label>
+                <select id="base" class="form-select">
+                    <option value="2">Binary</option>
+                    <option value="8">Octal</option>
+                    <option value="10">Decimal</option>
+                    <option value="16">Hexadecimal</option>
+                </select>
+                <button class="btn btn-primary mt-3" onclick="convertNumber()">Convert</button>
+                <div class="result-group mt-3">
+                    <p><strong>Binary:</strong> <span id="resultBinary"></span></p>
+                    <p><strong>Octal:</strong> <span id="resultOctal"></span></p>
+                    <p><strong>Decimal:</strong> <span id="resultDecimal"></span></p>
+                    <p><strong>Hexadecimal:</strong> <span id="resultHexadecimal"></span></p>
+                    <p><strong>Packed BCD:</strong> <span id="packResult"></span></p>
+                    <p><strong>Unpacked BCD:</strong> <span id="unpackResult"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assembly Simulation -->
+        <div class="card mt-3">
+            <div class="card-header">Assembly Simulation</div>
+            <div class="card-body">
+                <textarea id="assemblyInput" class="form-control" rows="5" placeholder="Enter assembly code here, e.g., MOV A, #25H"></textarea>
+                <div class="d-flex mt-3">
+                    <button class="btn btn-primary me-2" onclick="simulateAssembly()">Simulate</button>
+                    <button class="btn btn-secondary" onclick="listOpcodes()">View/Hide All Instructions</button>
+                </div>
+                <div id="opcodeList" class="result-group"></div>
+                <pre id="simulationResult" class="result-group mt-3"></pre>
+            </div>
+        </div>
+
+        <!-- Execution Time Calculator -->
+        <div class="card mt-3">
+            <div class="card-header">Execution Time Calculator</div>
+            <div class="card-body">
+                <label for="oscillatorFrequency" class="form-label">Oscillator Frequency (MHz):</label>
+                <input type="number" id="oscillatorFrequency" class="form-control" placeholder="e.g., 1">
+                <textarea id="instructionInput" class="form-control mt-3" rows="5" placeholder="Enter assembly instructions, e.g., MOV A,#25H"></textarea>
+                <button class="btn btn-primary mt-3" onclick="calculateExecutionTime()">Calculate</button>
+                <pre id="executionResult" class="result-group mt-3"></pre>
+            </div>
+        </div>
+
+        <!-- Address Calculator -->
+        <div class="card mt-3">
+            <div class="card-header">Address Calculator</div>
+            <div class="card-body">
+                <label for="address1" class="form-label">Address 1 (Hex):</label>
+                <input type="text" id="address1" class="form-control" placeholder="e.g., 8000">
+                <label for="address2" class="form-label mt-2">Address 2 (Hex):</label>
+                <input type="text" id="address2" class="form-control" placeholder="e.g., 0080">
+                <label for="addressOperation" class="form-label mt-2">Operation:</label>
+                <select id="addressOperation" class="form-select">
+                    <option value="add">Add (e.g., 8000 + 0080)</option>
+                    <option value="subtract">Subtract (e.g., 8000 - 0080)</option>
+                </select>
+                <button class="btn btn-primary mt-3" onclick="addSubtractAddress()">Calculate</button>
+                <pre id="addressResult" class="result-group mt-3"></pre>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

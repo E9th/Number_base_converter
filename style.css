@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding-top: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.card {
+    margin-bottom: 15px; /* ลดระยะห่างระหว่างแต่ละการ์ด */
+}
+
+.card-header {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 10px; /* ลดช่องว่างในหัวข้อ */
+}
+
+.card-body {
+    padding: 15px; /* ลดช่องว่างในเนื้อหาของการ์ด */
+}
+
+.result-group {
+    background-color: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    line-height: 1.2; /* ลดระยะห่างระหว่างบรรทัด */
+    font-size: 0.95rem; /* ขนาดฟอนต์เล็กลงเล็กน้อย */
+    margin-top: 10px; /* ลดช่องว่างก่อนเริ่มผลลัพธ์ */
+}
+
+button {
+    margin-right: 5px; /* ระยะห่างระหว่างปุ่ม */
+}
+
+pre {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 0.9rem; /* ขนาดฟอนต์เล็กลง */
+    line-height: 1.2; /* ลดช่องว่างระหว่างบรรทัด */
+}
+
+textarea {
+    margin-bottom: 10px;
+}
+
+.table {
+    font-size: 0.9rem;
+    line-height: 1.2; /* ลดช่องว่างในตาราง */
+}
+
+#opcodeList {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    max-height: 400px;
+    overflow-y: auto; /* Add scroll if the content exceeds height */
+    font-size: 0.9rem; /* Slightly smaller font size */
+    line-height: 1.4; /* Adjust line spacing for readability */
+}

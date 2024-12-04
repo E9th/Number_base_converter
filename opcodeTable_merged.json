@@ -1,0 +1,2306 @@
+{
+    "0": {
+        "mnemonic": "NOP",
+        "operands": null,
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for NOP None"
+    },
+    "1": {
+        "mnemonic": "AJMP",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for AJMP code addr"
+    },
+    "2": {
+        "mnemonic": "LJMP",
+        "operands": "code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for LJMP code addr"
+    },
+    "3": {
+        "mnemonic": "RR",
+        "operands": "A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for RR A"
+    },
+    "4": {
+        "mnemonic": "INC",
+        "operands": "A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for INC A"
+    },
+    "5": {
+        "mnemonic": "INC",
+        "operands": "data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for INC data addr"
+    },
+    "6": {
+        "mnemonic": "INC",
+        "operands": "@R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for INC @R0"
+    },
+    "7": {
+        "mnemonic": "INC",
+        "operands": "@R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for INC @R1"
+    },
+    "8": {
+        "mnemonic": "INC",
+        "operands": "R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for INC R0"
+    },
+    "9": {
+        "mnemonic": "INC",
+        "operands": "R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for INC R1"
+    },
+    "0A": {
+        "mnemonic": "INC",
+        "operands": "R2",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for INC R2"
+    },
+    "0B": {
+        "mnemonic": "INC",
+        "operands": "R3",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for INC R3"
+    },
+    "0C": {
+        "mnemonic": "INC",
+        "operands": "R4",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for INC R4"
+    },
+    "0D": {
+        "mnemonic": "INC",
+        "operands": "R5",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for INC R5"
+    },
+    "0E": {
+        "mnemonic": "INC",
+        "operands": "R6",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for INC R6"
+    },
+    "0F": {
+        "mnemonic": "INC",
+        "operands": "R7",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for INC R7"
+    },
+    "10": {
+        "mnemonic": "JBC",
+        "operands": "bit addr, code addr",
+        "number_of_bytes": 3,
+        "cycles": 2,
+        "type": "Control",
+        "immediate_data": false,
+        "description": "Conditional or unconditional jump."
+    },
+    "11": {
+        "mnemonic": "ACALL",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ACALL code addr"
+    },
+    "12": {
+        "mnemonic": "LCALL",
+        "operands": "code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for LCALL code addr"
+    },
+    "13": {
+        "mnemonic": "RRC",
+        "operands": "A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for RRC A"
+    },
+    "14": {
+        "mnemonic": "DEC",
+        "operands": "A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DEC A"
+    },
+    "15": {
+        "mnemonic": "DEC",
+        "operands": "data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DEC data addr"
+    },
+    "16": {
+        "mnemonic": "DEC",
+        "operands": "@R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DEC @R0"
+    },
+    "17": {
+        "mnemonic": "DEC",
+        "operands": "@R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DEC @R1"
+    },
+    "18": {
+        "mnemonic": "DEC",
+        "operands": "R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DEC R0"
+    },
+    "19": {
+        "mnemonic": "DEC",
+        "operands": "R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DEC R1"
+    },
+    "1A": {
+        "mnemonic": "DEC",
+        "operands": "R2",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DEC R2"
+    },
+    "1B": {
+        "mnemonic": "DEC",
+        "operands": "R3",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DEC R3"
+    },
+    "1C": {
+        "mnemonic": "DEC",
+        "operands": "R4",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DEC R4"
+    },
+    "1D": {
+        "mnemonic": "DEC",
+        "operands": "R5",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DEC R5"
+    },
+    "1E": {
+        "mnemonic": "DEC",
+        "operands": "R6",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DEC R6"
+    },
+    "1F": {
+        "mnemonic": "DEC",
+        "operands": "R7",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DEC R7"
+    },
+    "20": {
+        "mnemonic": "JB",
+        "operands": "bit addr, code addr",
+        "number_of_bytes": 3,
+        "cycles": 2,
+        "type": "Control",
+        "immediate_data": false,
+        "description": "Conditional or unconditional jump."
+    },
+    "21": {
+        "mnemonic": "AJMP",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for AJMP code addr"
+    },
+    "22": {
+        "mnemonic": "RET",
+        "operands": null,
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for RET None"
+    },
+    "23": {
+        "mnemonic": "RL",
+        "operands": "A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for RL A"
+    },
+    "24": {
+        "mnemonic": "ADD",
+        "operands": "A, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Arithmetic",
+        "immediate_data": false,
+        "description": "Add data to accumulator."
+    },
+    "25": {
+        "mnemonic": "ADD",
+        "operands": "A, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Arithmetic",
+        "immediate_data": false,
+        "description": "Add data to accumulator."
+    },
+    "26": {
+        "mnemonic": "ADD",
+        "operands": "A, @R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Arithmetic",
+        "immediate_data": false,
+        "description": "Add data to accumulator."
+    },
+    "27": {
+        "mnemonic": "ADD",
+        "operands": "A, @R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Arithmetic",
+        "immediate_data": false,
+        "description": "Add data to accumulator."
+    },
+    "28": {
+        "mnemonic": "ADD",
+        "operands": "A, R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Arithmetic",
+        "immediate_data": false,
+        "description": "Add data to accumulator."
+    },
+    "29": {
+        "mnemonic": "ADD",
+        "operands": "A, R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Arithmetic",
+        "immediate_data": false,
+        "description": "Add data to accumulator."
+    },
+    "2A": {
+        "mnemonic": "ADD",
+        "operands": "A, R2",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Arithmetic",
+        "immediate_data": false,
+        "description": "Add data to accumulator."
+    },
+    "2B": {
+        "mnemonic": "ADD",
+        "operands": "A, R3",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Arithmetic",
+        "immediate_data": false,
+        "description": "Add data to accumulator."
+    },
+    "2C": {
+        "mnemonic": "ADD",
+        "operands": "A, R4",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Arithmetic",
+        "immediate_data": false,
+        "description": "Add data to accumulator."
+    },
+    "2D": {
+        "mnemonic": "ADD",
+        "operands": "A, R5",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Arithmetic",
+        "immediate_data": false,
+        "description": "Add data to accumulator."
+    },
+    "2E": {
+        "mnemonic": "ADD",
+        "operands": "A, R6",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Arithmetic",
+        "immediate_data": false,
+        "description": "Add data to accumulator."
+    },
+    "2F": {
+        "mnemonic": "ADD",
+        "operands": "A, R7",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Arithmetic",
+        "immediate_data": false,
+        "description": "Add data to accumulator."
+    },
+    "30": {
+        "mnemonic": "JNB",
+        "operands": "bit addr, code addr",
+        "number_of_bytes": 2,
+        "cycles": 2,
+        "type": "Control",
+        "immediate_data": false,
+        "description": "Conditional or unconditional jump."
+    },
+    "31": {
+        "mnemonic": "ACALL",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ACALL code addr"
+    },
+    "32": {
+        "mnemonic": "RETI",
+        "operands": null,
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for RETI None"
+    },
+    "33": {
+        "mnemonic": "RLC",
+        "operands": "A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for RLC A"
+    },
+    "34": {
+        "mnemonic": "ADDC",
+        "operands": "A, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ADDC A, #data"
+    },
+    "35": {
+        "mnemonic": "ADDC",
+        "operands": "A, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ADDC A, data addr"
+    },
+    "36": {
+        "mnemonic": "ADDC",
+        "operands": "A, @R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ADDC A, @R0"
+    },
+    "37": {
+        "mnemonic": "ADDC",
+        "operands": "A, @R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ADDC A, @R1"
+    },
+    "38": {
+        "mnemonic": "ADDC",
+        "operands": "A, R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ADDC A, R0"
+    },
+    "39": {
+        "mnemonic": "ADDC",
+        "operands": "A, R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ADDC A, R1"
+    },
+    "3A": {
+        "mnemonic": "ADDC",
+        "operands": "A, R2",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ADDC A, R2"
+    },
+    "3B": {
+        "mnemonic": "ADDC",
+        "operands": "A, R3",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ADDC A, R3"
+    },
+    "3C": {
+        "mnemonic": "ADDC",
+        "operands": "A, R4",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ADDC A, R4"
+    },
+    "3D": {
+        "mnemonic": "ADDC",
+        "operands": "A, R5",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ADDC A, R5"
+    },
+    "3E": {
+        "mnemonic": "ADDC",
+        "operands": "A, R6",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ADDC A, R6"
+    },
+    "3F": {
+        "mnemonic": "ADDC",
+        "operands": "A, R7",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ADDC A, R7"
+    },
+    "40": {
+        "mnemonic": "JC",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 2,
+        "type": "Control",
+        "immediate_data": false,
+        "description": "Conditional or unconditional jump."
+    },
+    "41": {
+        "mnemonic": "AJMP",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for AJMP code addr"
+    },
+    "42": {
+        "mnemonic": "ORL",
+        "operands": "data addr, A",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL data addr, A"
+    },
+    "43": {
+        "mnemonic": "ORL",
+        "operands": "data addr, #data",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL data addr, #data"
+    },
+    "44": {
+        "mnemonic": "ORL",
+        "operands": "A, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL A, #data"
+    },
+    "45": {
+        "mnemonic": "ORL",
+        "operands": "A, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL A, data addr"
+    },
+    "46": {
+        "mnemonic": "ORL",
+        "operands": "A, @R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL A, @R0"
+    },
+    "47": {
+        "mnemonic": "ORL",
+        "operands": "A, @R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL A, @R1"
+    },
+    "48": {
+        "mnemonic": "ORL",
+        "operands": "A, R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL A, R0"
+    },
+    "49": {
+        "mnemonic": "ORL",
+        "operands": "A, R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL A, R1"
+    },
+    "4A": {
+        "mnemonic": "ORL",
+        "operands": "A, R2",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL A, R2"
+    },
+    "4B": {
+        "mnemonic": "ORL",
+        "operands": "A, R3",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL A, R3"
+    },
+    "4C": {
+        "mnemonic": "ORL",
+        "operands": "A, R4",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL A, R4"
+    },
+    "4D": {
+        "mnemonic": "ORL",
+        "operands": "A, R5",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL A, R5"
+    },
+    "4E": {
+        "mnemonic": "ORL",
+        "operands": "A, R6",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL A, R6"
+    },
+    "4F": {
+        "mnemonic": "ORL",
+        "operands": "A, R7",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL A, R7"
+    },
+    "50": {
+        "mnemonic": "JNC",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 2,
+        "type": "Control",
+        "immediate_data": false,
+        "description": "Conditional or unconditional jump."
+    },
+    "51": {
+        "mnemonic": "ACALL",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ACALL code addr"
+    },
+    "52": {
+        "mnemonic": "ANL",
+        "operands": "data addr, A",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL data addr, A"
+    },
+    "53": {
+        "mnemonic": "ANL",
+        "operands": "data addr, #data",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL data addr, #data"
+    },
+    "54": {
+        "mnemonic": "ANL",
+        "operands": "A, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL A, #data"
+    },
+    "55": {
+        "mnemonic": "ANL",
+        "operands": "A, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL A, data addr"
+    },
+    "56": {
+        "mnemonic": "ANL",
+        "operands": "A, @R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL A, @R0"
+    },
+    "57": {
+        "mnemonic": "ANL",
+        "operands": "A, @R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL A, @R1"
+    },
+    "58": {
+        "mnemonic": "ANL",
+        "operands": "A, R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL A, R0"
+    },
+    "59": {
+        "mnemonic": "ANL",
+        "operands": "A, R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL A, R1"
+    },
+    "5A": {
+        "mnemonic": "ANL",
+        "operands": "A, R2",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL A, R2"
+    },
+    "5B": {
+        "mnemonic": "ANL",
+        "operands": "A, R3",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL A, R3"
+    },
+    "5C": {
+        "mnemonic": "ANL",
+        "operands": "A, R4",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL A, R4"
+    },
+    "5D": {
+        "mnemonic": "ANL",
+        "operands": "A, R5",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL A, R5"
+    },
+    "5E": {
+        "mnemonic": "ANL",
+        "operands": "A, R6",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL A, R6"
+    },
+    "5F": {
+        "mnemonic": "ANL",
+        "operands": "A, R7",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL A, R7"
+    },
+    "60": {
+        "mnemonic": "JZ",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 2,
+        "type": "Control",
+        "immediate_data": false,
+        "description": "Conditional or unconditional jump."
+    },
+    "61": {
+        "mnemonic": "AJMP",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for AJMP code addr"
+    },
+    "62": {
+        "mnemonic": "XRL",
+        "operands": "data addr, A",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL data addr, A"
+    },
+    "63": {
+        "mnemonic": "XRL",
+        "operands": "data addr, #data",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL data addr, #data"
+    },
+    "64": {
+        "mnemonic": "XRL",
+        "operands": "A, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL A, #data"
+    },
+    "65": {
+        "mnemonic": "XRL",
+        "operands": "A, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL A, data addr"
+    },
+    "66": {
+        "mnemonic": "XRL",
+        "operands": "A, @R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL A, @R0"
+    },
+    "67": {
+        "mnemonic": "XRL",
+        "operands": "A, @R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL A, @R1"
+    },
+    "68": {
+        "mnemonic": "XRL",
+        "operands": "A, R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL A, R0"
+    },
+    "69": {
+        "mnemonic": "XRL",
+        "operands": "A, R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL A, R1"
+    },
+    "6A": {
+        "mnemonic": "XRL",
+        "operands": "A, R2",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL A, R2"
+    },
+    "6B": {
+        "mnemonic": "XRL",
+        "operands": "A, R3",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL A, R3"
+    },
+    "6C": {
+        "mnemonic": "XRL",
+        "operands": "A, R4",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL A, R4"
+    },
+    "6D": {
+        "mnemonic": "XRL",
+        "operands": "A, R5",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL A, R5"
+    },
+    "6E": {
+        "mnemonic": "XRL",
+        "operands": "A, R6",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL A, R6"
+    },
+    "6F": {
+        "mnemonic": "XRL",
+        "operands": "A, R7",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XRL A, R7"
+    },
+    "70": {
+        "mnemonic": "JNZ",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 2,
+        "type": "Control",
+        "immediate_data": false,
+        "description": "Conditional or unconditional jump."
+    },
+    "71": {
+        "mnemonic": "ACALL",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ACALL code addr"
+    },
+    "72": {
+        "mnemonic": "ORL",
+        "operands": "C, bit addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL C, bit addr"
+    },
+    "73": {
+        "mnemonic": "JMP",
+        "operands": "@A + DPTR",
+        "number_of_bytes": 1,
+        "cycles": 2,
+        "type": "Control",
+        "immediate_data": false,
+        "description": "Conditional or unconditional jump."
+    },
+    "74": {
+        "mnemonic": "MOV",
+        "operands": "A, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": true,
+        "description": "Move immediate data to destination."
+    },
+    "75": {
+        "mnemonic": "MOV",
+        "operands": "data addr, #data",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": true,
+        "description": "Move immediate data to destination."
+    },
+    "76": {
+        "mnemonic": "MOV",
+        "operands": "@R0, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": true,
+        "description": "Move immediate data to destination."
+    },
+    "77": {
+        "mnemonic": "MOV",
+        "operands": "@R1, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": true,
+        "description": "Move immediate data to destination."
+    },
+    "78": {
+        "mnemonic": "MOV",
+        "operands": "R0, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": true,
+        "description": "Move immediate data to destination."
+    },
+    "79": {
+        "mnemonic": "MOV",
+        "operands": "R1, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": true,
+        "description": "Move immediate data to destination."
+    },
+    "7A": {
+        "mnemonic": "MOV",
+        "operands": "R2, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": true,
+        "description": "Move immediate data to destination."
+    },
+    "7B": {
+        "mnemonic": "MOV",
+        "operands": "R3, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": true,
+        "description": "Move immediate data to destination."
+    },
+    "7C": {
+        "mnemonic": "MOV",
+        "operands": "R4, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": true,
+        "description": "Move immediate data to destination."
+    },
+    "7D": {
+        "mnemonic": "MOV",
+        "operands": "R5, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": true,
+        "description": "Move immediate data to destination."
+    },
+    "7E": {
+        "mnemonic": "MOV",
+        "operands": "R6, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": true,
+        "description": "Move immediate data to destination."
+    },
+    "7F": {
+        "mnemonic": "MOV",
+        "operands": "R7, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": true,
+        "description": "Move immediate data to destination."
+    },
+    "80": {
+        "mnemonic": "SJMP",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SJMP code addr"
+    },
+    "81": {
+        "mnemonic": "AJMP",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for AJMP code addr"
+    },
+    "82": {
+        "mnemonic": "ANL",
+        "operands": "C, bit addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL C, bit addr"
+    },
+    "83": {
+        "mnemonic": "MOVC",
+        "operands": "A, @A + PC",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for MOVC A, @A + PC"
+    },
+    "84": {
+        "mnemonic": "DIV",
+        "operands": "AB",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DIV AB"
+    },
+    "85": {
+        "mnemonic": "MOV",
+        "operands": "data addr, data addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "86": {
+        "mnemonic": "MOV",
+        "operands": "data addr, @R0",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "87": {
+        "mnemonic": "MOV",
+        "operands": "data addr, @R1",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "88": {
+        "mnemonic": "MOV",
+        "operands": "data addr, R0",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "89": {
+        "mnemonic": "MOV",
+        "operands": "data addr, R1",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "8A": {
+        "mnemonic": "MOV",
+        "operands": "data addr, R2",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "8B": {
+        "mnemonic": "MOV",
+        "operands": "data addr, R3",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "8C": {
+        "mnemonic": "MOV",
+        "operands": "data addr, R4",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "8D": {
+        "mnemonic": "MOV",
+        "operands": "data addr, R5",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "8E": {
+        "mnemonic": "MOV",
+        "operands": "data addr, R6",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "8F": {
+        "mnemonic": "MOV",
+        "operands": "data addr, R7",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "90": {
+        "mnemonic": "MOV",
+        "operands": "DPTR, #data",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": true,
+        "description": "Move immediate data to destination."
+    },
+    "91": {
+        "mnemonic": "ACALL",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ACALL code addr"
+    },
+    "92": {
+        "mnemonic": "MOV",
+        "operands": "bit addr, C",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "93": {
+        "mnemonic": "MOVC",
+        "operands": "A, @A + DPTR",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for MOVC A, @A + DPTR"
+    },
+    "94": {
+        "mnemonic": "SUBB",
+        "operands": "A, #data",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SUBB A, #data"
+    },
+    "95": {
+        "mnemonic": "SUBB",
+        "operands": "A, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SUBB A, data addr"
+    },
+    "96": {
+        "mnemonic": "SUBB",
+        "operands": "A, @R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SUBB A, @R0"
+    },
+    "97": {
+        "mnemonic": "SUBB",
+        "operands": "A, @R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SUBB A, @R1"
+    },
+    "98": {
+        "mnemonic": "SUBB",
+        "operands": "A, R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SUBB A, R0"
+    },
+    "99": {
+        "mnemonic": "SUBB",
+        "operands": "A, R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SUBB A, R1"
+    },
+    "9A": {
+        "mnemonic": "SUBB",
+        "operands": "A, R2",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SUBB A, R2"
+    },
+    "9B": {
+        "mnemonic": "SUBB",
+        "operands": "A, R3",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SUBB A, R3"
+    },
+    "9C": {
+        "mnemonic": "SUBB",
+        "operands": "A, R4",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SUBB A, R4"
+    },
+    "9D": {
+        "mnemonic": "SUBB",
+        "operands": "A, R5",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SUBB A, R5"
+    },
+    "9E": {
+        "mnemonic": "SUBB",
+        "operands": "A, R6",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SUBB A, R6"
+    },
+    "9F": {
+        "mnemonic": "SUBB",
+        "operands": "A, R7",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SUBB A, R7"
+    },
+    "A0": {
+        "mnemonic": "ORL",
+        "operands": "C, /bit addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ORL C, /bit addr"
+    },
+    "A1": {
+        "mnemonic": "AJMP",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for AJMP code addr"
+    },
+    "A2": {
+        "mnemonic": "MOV",
+        "operands": "C, bit addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "A3": {
+        "mnemonic": "INC",
+        "operands": "DPTR",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for INC DPTR"
+    },
+    "A4": {
+        "mnemonic": "MUL",
+        "operands": "AB",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for MUL AB"
+    },
+    "A5": {
+        "mnemonic": "reserved",
+        "operands": null,
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for reserved None"
+    },
+    "A6": {
+        "mnemonic": "MOV",
+        "operands": "@R0, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "A7": {
+        "mnemonic": "MOV",
+        "operands": "@R1, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "A8": {
+        "mnemonic": "MOV",
+        "operands": "R0, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "A9": {
+        "mnemonic": "MOV",
+        "operands": "R1, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "AA": {
+        "mnemonic": "MOV",
+        "operands": "R2, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "AB": {
+        "mnemonic": "MOV",
+        "operands": "R3, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "AC": {
+        "mnemonic": "MOV",
+        "operands": "R4, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "AD": {
+        "mnemonic": "MOV",
+        "operands": "R5, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "AE": {
+        "mnemonic": "MOV",
+        "operands": "R6, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "AF": {
+        "mnemonic": "MOV",
+        "operands": "R7, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "B0": {
+        "mnemonic": "ANL",
+        "operands": "C, /bit addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ANL C, /bit addr"
+    },
+    "B1": {
+        "mnemonic": "ACALL",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ACALL code addr"
+    },
+    "B2": {
+        "mnemonic": "CPL",
+        "operands": "bit addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CPL bit addr"
+    },
+    "B3": {
+        "mnemonic": "CPL",
+        "operands": "C",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CPL C"
+    },
+    "B4": {
+        "mnemonic": "CJNE",
+        "operands": "A, #data, code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CJNE A, #data, code addr"
+    },
+    "B5": {
+        "mnemonic": "CJNE",
+        "operands": "A, data addr, code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CJNE A, data addr, code addr"
+    },
+    "B6": {
+        "mnemonic": "CJNE",
+        "operands": "@R0, #data, code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CJNE @R0, #data, code addr"
+    },
+    "B7": {
+        "mnemonic": "CJNE",
+        "operands": "@R1, #data, code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CJNE @R1, #data, code addr"
+    },
+    "B8": {
+        "mnemonic": "CJNE",
+        "operands": "R0, #data, code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CJNE R0, #data, code addr"
+    },
+    "B9": {
+        "mnemonic": "CJNE",
+        "operands": "R1, #data, code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CJNE R1, #data, code addr"
+    },
+    "BA": {
+        "mnemonic": "CJNE",
+        "operands": "R2, #data, code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CJNE R2, #data, code addr"
+    },
+    "BB": {
+        "mnemonic": "CJNE",
+        "operands": "R3, #data, code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CJNE R3, #data, code addr"
+    },
+    "BC": {
+        "mnemonic": "CJNE",
+        "operands": "R4, #data, code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CJNE R4, #data, code addr"
+    },
+    "BD": {
+        "mnemonic": "CJNE",
+        "operands": "R5, #data, code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CJNE R5, #data, code addr"
+    },
+    "BE": {
+        "mnemonic": "CJNE",
+        "operands": "R6, #data, code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CJNE R6, #data, code addr"
+    },
+    "BF": {
+        "mnemonic": "CJNE",
+        "operands": "R7, #data, code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CJNE R7, #data, code addr"
+    },
+    "C0": {
+        "mnemonic": "PUSH",
+        "operands": "data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for PUSH data addr"
+    },
+    "C1": {
+        "mnemonic": "AJMP",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for AJMP code addr"
+    },
+    "C2": {
+        "mnemonic": "CLR",
+        "operands": "bit addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Logical",
+        "immediate_data": false,
+        "description": "Clear the specified register or flag."
+    },
+    "C3": {
+        "mnemonic": "CLR",
+        "operands": "C",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Logical",
+        "immediate_data": false,
+        "description": "Clear the specified register or flag."
+    },
+    "C4": {
+        "mnemonic": "SWAP",
+        "operands": "A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SWAP A"
+    },
+    "C5": {
+        "mnemonic": "XCH",
+        "operands": "A, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XCH A, data addr"
+    },
+    "C6": {
+        "mnemonic": "XCH",
+        "operands": "A, @R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XCH A, @R0"
+    },
+    "C7": {
+        "mnemonic": "XCH",
+        "operands": "A, @R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XCH A, @R1"
+    },
+    "C8": {
+        "mnemonic": "XCH",
+        "operands": "A, R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XCH A, R0"
+    },
+    "C9": {
+        "mnemonic": "XCH",
+        "operands": "A, R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XCH A, R1"
+    },
+    "CA": {
+        "mnemonic": "XCH",
+        "operands": "A, R2",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XCH A, R2"
+    },
+    "CB": {
+        "mnemonic": "XCH",
+        "operands": "A, R3",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XCH A, R3"
+    },
+    "CC": {
+        "mnemonic": "XCH",
+        "operands": "A, R4",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XCH A, R4"
+    },
+    "CD": {
+        "mnemonic": "XCH",
+        "operands": "A, R5",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XCH A, R5"
+    },
+    "CE": {
+        "mnemonic": "XCH",
+        "operands": "A, R6",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XCH A, R6"
+    },
+    "CF": {
+        "mnemonic": "XCH",
+        "operands": "A, R7",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XCH A, R7"
+    },
+    "D0": {
+        "mnemonic": "POP",
+        "operands": "data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for POP data addr"
+    },
+    "D1": {
+        "mnemonic": "ACALL",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ACALL code addr"
+    },
+    "D2": {
+        "mnemonic": "SETB",
+        "operands": "bit addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SETB bit addr"
+    },
+    "D3": {
+        "mnemonic": "SETB",
+        "operands": "C",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for SETB C"
+    },
+    "D4": {
+        "mnemonic": "DA",
+        "operands": "A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DA A"
+    },
+    "D5": {
+        "mnemonic": "DJNZ",
+        "operands": "data addr, code addr",
+        "number_of_bytes": 3,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DJNZ data addr, code addr"
+    },
+    "D6": {
+        "mnemonic": "XCHD",
+        "operands": "A, @R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XCHD A, @R0"
+    },
+    "D7": {
+        "mnemonic": "XCHD",
+        "operands": "A, @R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for XCHD A, @R1"
+    },
+    "D8": {
+        "mnemonic": "DJNZ",
+        "operands": "R0, code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DJNZ R0, code addr"
+    },
+    "D9": {
+        "mnemonic": "DJNZ",
+        "operands": "R1, code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DJNZ R1, code addr"
+    },
+    "DA": {
+        "mnemonic": "DJNZ",
+        "operands": "R2, code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DJNZ R2, code addr"
+    },
+    "DB": {
+        "mnemonic": "DJNZ",
+        "operands": "R3, code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DJNZ R3, code addr"
+    },
+    "DC": {
+        "mnemonic": "DJNZ",
+        "operands": "R4, code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DJNZ R4, code addr"
+    },
+    "DD": {
+        "mnemonic": "DJNZ",
+        "operands": "R5, code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DJNZ R5, code addr"
+    },
+    "DE": {
+        "mnemonic": "DJNZ",
+        "operands": "R6, code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DJNZ R6, code addr"
+    },
+    "DF": {
+        "mnemonic": "DJNZ",
+        "operands": "R7, code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for DJNZ R7, code addr"
+    },
+    "E0": {
+        "mnemonic": "MOVX",
+        "operands": "A, @DPTR",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for MOVX A, @DPTR"
+    },
+    "E1": {
+        "mnemonic": "AJMP",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for AJMP code addr"
+    },
+    "E2": {
+        "mnemonic": "MOVX",
+        "operands": "A, @R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for MOVX A, @R0"
+    },
+    "E3": {
+        "mnemonic": "MOVX",
+        "operands": "A, @R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for MOVX A, @R1"
+    },
+    "E4": {
+        "mnemonic": "CLR",
+        "operands": "A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Logical",
+        "immediate_data": false,
+        "description": "Clear the specified register or flag."
+    },
+    "E5": {
+        "mnemonic": "MOV",
+        "operands": "A, data addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "E6": {
+        "mnemonic": "MOVX",
+        "operands": "A, @R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for MOVX A, @R0"
+    },
+    "E7": {
+        "mnemonic": "MOVX",
+        "operands": "A, @R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for MOVX A, @R1"
+    },
+    "E8": {
+        "mnemonic": "MOV",
+        "operands": "A, R0",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "E9": {
+        "mnemonic": "MOV",
+        "operands": "A, R1",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "EA": {
+        "mnemonic": "MOV",
+        "operands": "A, R2",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "EB": {
+        "mnemonic": "MOV",
+        "operands": "A, R3",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "EC": {
+        "mnemonic": "MOV",
+        "operands": "A, R4",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "ED": {
+        "mnemonic": "MOV",
+        "operands": "A, R5",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "EE": {
+        "mnemonic": "MOV",
+        "operands": "A, R6",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "EF": {
+        "mnemonic": "MOV",
+        "operands": "A, R7",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "F0": {
+        "mnemonic": "MOVX",
+        "operands": "@DPTR, A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for MOVX @DPTR, A"
+    },
+    "F1": {
+        "mnemonic": "ACALL",
+        "operands": "code addr",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for ACALL code addr"
+    },
+    "F2": {
+        "mnemonic": "MOVX",
+        "operands": "@R0, A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for MOVX @R0, A"
+    },
+    "F3": {
+        "mnemonic": "MOVX",
+        "operands": "@R1, A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for MOVX @R1, A"
+    },
+    "F4": {
+        "mnemonic": "CPL",
+        "operands": "A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Unknown",
+        "immediate_data": false,
+        "description": "No description available for CPL A"
+    },
+    "F5": {
+        "mnemonic": "MOV",
+        "operands": "data addr, A",
+        "number_of_bytes": 2,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "F6": {
+        "mnemonic": "MOV",
+        "operands": "@R0, A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "F7": {
+        "mnemonic": "MOV",
+        "operands": "@R1, A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "F8": {
+        "mnemonic": "MOV",
+        "operands": "R0, A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "F9": {
+        "mnemonic": "MOV",
+        "operands": "R1, A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "FA": {
+        "mnemonic": "MOV",
+        "operands": "R2, A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "FB": {
+        "mnemonic": "MOV",
+        "operands": "R3, A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "FC": {
+        "mnemonic": "MOV",
+        "operands": "R4, A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "FD": {
+        "mnemonic": "MOV",
+        "operands": "R5, A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "FE": {
+        "mnemonic": "MOV",
+        "operands": "R6, A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    },
+    "FF": {
+        "mnemonic": "MOV",
+        "operands": "R7, A",
+        "number_of_bytes": 1,
+        "cycles": 1,
+        "type": "Data Transfer",
+        "immediate_data": false,
+        "description": "Move data between registers or memory."
+    }
+}
