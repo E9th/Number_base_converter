@@ -1,5 +1,5 @@
 {
-    "0": {
+    "00": {
         "mnemonic": "NOP",
         "operands": null,
         "number_of_bytes": 1,
@@ -8,7 +8,7 @@
         "immediate_data": false,
         "description": "No description available for NOP None"
     },
-    "1": {
+    "01": {
         "mnemonic": "AJMP",
         "operands": "code addr",
         "number_of_bytes": 2,
@@ -17,7 +17,7 @@
         "immediate_data": false,
         "description": "No description available for AJMP code addr"
     },
-    "2": {
+    "02": {
         "mnemonic": "LJMP",
         "operands": "code addr",
         "number_of_bytes": 3,
@@ -26,7 +26,7 @@
         "immediate_data": false,
         "description": "No description available for LJMP code addr"
     },
-    "3": {
+    "03": {
         "mnemonic": "RR",
         "operands": "A",
         "number_of_bytes": 1,
@@ -35,7 +35,7 @@
         "immediate_data": false,
         "description": "Rotate accumulator right."
     },
-    "4": {
+    "04": {
         "mnemonic": "INC",
         "operands": "A",
         "number_of_bytes": 1,
@@ -44,7 +44,7 @@
         "immediate_data": false,
         "description": "No description available for INC A"
     },
-    "5": {
+    "05": {
         "mnemonic": "INC",
         "operands": "data addr",
         "number_of_bytes": 2,
@@ -53,25 +53,25 @@
         "immediate_data": false,
         "description": "No description available for INC data addr"
     },
-    "6": {
+    "06": {
         "mnemonic": "INC",
-        "operands": "@R0",
+        "operands": "Z0",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for INC @R0"
+        "description": "No description available for INC Z0"
     },
-    "7": {
+    "07": {
         "mnemonic": "INC",
-        "operands": "@R1",
+        "operands": "Z1",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for INC @R1"
+        "description": "No description available for INC Z1"
     },
-    "8": {
+    "08": {
         "mnemonic": "INC",
         "operands": "R0",
         "number_of_bytes": 1,
@@ -80,7 +80,7 @@
         "immediate_data": false,
         "description": "No description available for INC R0"
     },
-    "9": {
+    "09": {
         "mnemonic": "INC",
         "operands": "R1",
         "number_of_bytes": 1,
@@ -199,21 +199,21 @@
     },
     "16": {
         "mnemonic": "DEC",
-        "operands": "@R0",
+        "operands": "Z0",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for DEC @R0"
+        "description": "No description available for DEC Z0"
     },
     "17": {
         "mnemonic": "DEC",
-        "operands": "@R1",
+        "operands": "Z1",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for DEC @R1"
+        "description": "No description available for DEC Z1"
     },
     "18": {
         "mnemonic": "DEC",
@@ -343,7 +343,7 @@
     },
     "26": {
         "mnemonic": "ADD",
-        "operands": "A, @R0",
+        "operands": "A, Z0",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Arithmetic",
@@ -352,7 +352,7 @@
     },
     "27": {
         "mnemonic": "ADD",
-        "operands": "A, @R1",
+        "operands": "A, Z1",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Arithmetic",
@@ -487,21 +487,21 @@
     },
     "36": {
         "mnemonic": "ADDC",
-        "operands": "A, @R0",
+        "operands": "A, Z0",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for ADDC A, @R0"
+        "description": "No description available for ADDC A, Z0"
     },
     "37": {
         "mnemonic": "ADDC",
-        "operands": "A, @R1",
+        "operands": "A, Z1",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for ADDC A, @R1"
+        "description": "No description available for ADDC A, Z1"
     },
     "38": {
         "mnemonic": "ADDC",
@@ -631,21 +631,21 @@
     },
     "46": {
         "mnemonic": "ORL",
-        "operands": "A, @R0",
+        "operands": "A, Z0",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for ORL A, @R0"
+        "description": "No description available for ORL A, Z0"
     },
     "47": {
         "mnemonic": "ORL",
-        "operands": "A, @R1",
+        "operands": "A, Z1",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for ORL A, @R1"
+        "description": "No description available for ORL A, Z1"
     },
     "48": {
         "mnemonic": "ORL",
@@ -775,21 +775,21 @@
     },
     "56": {
         "mnemonic": "ANL",
-        "operands": "A, @R0",
+        "operands": "A, Z0",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for ANL A, @R0"
+        "description": "No description available for ANL A, Z0"
     },
     "57": {
         "mnemonic": "ANL",
-        "operands": "A, @R1",
+        "operands": "A, Z1",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for ANL A, @R1"
+        "description": "No description available for ANL A, Z1"
     },
     "58": {
         "mnemonic": "ANL",
@@ -919,21 +919,21 @@
     },
     "66": {
         "mnemonic": "XRL",
-        "operands": "A, @R0",
+        "operands": "A, Z0",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for XRL A, @R0"
+        "description": "No description available for XRL A, Z0"
     },
     "67": {
         "mnemonic": "XRL",
-        "operands": "A, @R1",
+        "operands": "A, Z1",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for XRL A, @R1"
+        "description": "No description available for XRL A, Z1"
     },
     "68": {
         "mnemonic": "XRL",
@@ -1036,7 +1036,7 @@
     },
     "73": {
         "mnemonic": "JMP",
-        "operands": "@A + DPTR",
+        "operands": "X + DPTR",
         "number_of_bytes": 1,
         "cycles": 2,
         "type": "Control",
@@ -1063,7 +1063,7 @@
     },
     "76": {
         "mnemonic": "MOV",
-        "operands": "@R0, #data",
+        "operands": "Z0, #data",
         "number_of_bytes": 2,
         "cycles": 1,
         "type": "Data Transfer",
@@ -1072,7 +1072,7 @@
     },
     "77": {
         "mnemonic": "MOV",
-        "operands": "@R1, #data",
+        "operands": "Z1, #data",
         "number_of_bytes": 2,
         "cycles": 1,
         "type": "Data Transfer",
@@ -1180,12 +1180,12 @@
     },
     "83": {
         "mnemonic": "MOVC",
-        "operands": "A, @A + PC",
+        "operands": "A, X + PC",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for MOVC A, @A + PC"
+        "description": "No description available for MOVC A, X + PC"
     },
     "84": {
         "mnemonic": "DIV",
@@ -1207,7 +1207,7 @@
     },
     "86": {
         "mnemonic": "MOV",
-        "operands": "data addr, @R0",
+        "operands": "data addr, Z0",
         "number_of_bytes": 2,
         "cycles": 1,
         "type": "Data Transfer",
@@ -1216,7 +1216,7 @@
     },
     "87": {
         "mnemonic": "MOV",
-        "operands": "data addr, @R1",
+        "operands": "data addr, Z1",
         "number_of_bytes": 2,
         "cycles": 1,
         "type": "Data Transfer",
@@ -1324,12 +1324,12 @@
     },
     "93": {
         "mnemonic": "MOVC",
-        "operands": "A, @A + DPTR",
+        "operands": "A, X + DPTR",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for MOVC A, @A + DPTR"
+        "description": "No description available for MOVC A, X + DPTR"
     },
     "94": {
         "mnemonic": "SUBB",
@@ -1351,21 +1351,21 @@
     },
     "96": {
         "mnemonic": "SUBB",
-        "operands": "A, @R0",
+        "operands": "A, Z0",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for SUBB A, @R0"
+        "description": "No description available for SUBB A, Z0"
     },
     "97": {
         "mnemonic": "SUBB",
-        "operands": "A, @R1",
+        "operands": "A, Z1",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for SUBB A, @R1"
+        "description": "No description available for SUBB A, Z1"
     },
     "98": {
         "mnemonic": "SUBB",
@@ -1495,7 +1495,7 @@
     },
     "A6": {
         "mnemonic": "MOV",
-        "operands": "@R0, data addr",
+        "operands": "Z0, data addr",
         "number_of_bytes": 2,
         "cycles": 1,
         "type": "Data Transfer",
@@ -1504,7 +1504,7 @@
     },
     "A7": {
         "mnemonic": "MOV",
-        "operands": "@R1, data addr",
+        "operands": "Z1, data addr",
         "number_of_bytes": 2,
         "cycles": 1,
         "type": "Data Transfer",
@@ -1639,21 +1639,21 @@
     },
     "B6": {
         "mnemonic": "CJNE",
-        "operands": "@R0, #data, code addr",
+        "operands": "Z0, #data, code addr",
         "number_of_bytes": 3,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for CJNE @R0, #data, code addr"
+        "description": "No description available for CJNE Z0, #data, code addr"
     },
     "B7": {
         "mnemonic": "CJNE",
-        "operands": "@R1, #data, code addr",
+        "operands": "Z1, #data, code addr",
         "number_of_bytes": 3,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for CJNE @R1, #data, code addr"
+        "description": "No description available for CJNE Z1, #data, code addr"
     },
     "B8": {
         "mnemonic": "CJNE",
@@ -1783,21 +1783,21 @@
     },
     "C6": {
         "mnemonic": "XCH",
-        "operands": "A, @R0",
+        "operands": "A, Z0",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for XCH A, @R0"
+        "description": "No description available for XCH A, Z0"
     },
     "C7": {
         "mnemonic": "XCH",
-        "operands": "A, @R1",
+        "operands": "A, Z1",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for XCH A, @R1"
+        "description": "No description available for XCH A, Z1"
     },
     "C8": {
         "mnemonic": "XCH",
@@ -1927,21 +1927,21 @@
     },
     "D6": {
         "mnemonic": "XCHD",
-        "operands": "A, @R0",
+        "operands": "A, Z0",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for XCHD A, @R0"
+        "description": "No description available for XCHD A, Z0"
     },
     "D7": {
         "mnemonic": "XCHD",
-        "operands": "A, @R1",
+        "operands": "A, Z1",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for XCHD A, @R1"
+        "description": "No description available for XCHD A, Z1"
     },
     "D8": {
         "mnemonic": "DJNZ",
@@ -2035,21 +2035,21 @@
     },
     "E2": {
         "mnemonic": "MOVX",
-        "operands": "A, @R0",
+        "operands": "A, Z0",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for MOVX A, @R0"
+        "description": "No description available for MOVX A, Z0"
     },
     "E3": {
         "mnemonic": "MOVX",
-        "operands": "A, @R1",
+        "operands": "A, Z1",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for MOVX A, @R1"
+        "description": "No description available for MOVX A, Z1"
     },
     "E4": {
         "mnemonic": "CLR",
@@ -2071,21 +2071,21 @@
     },
     "E6": {
         "mnemonic": "MOVX",
-        "operands": "A, @R0",
+        "operands": "A, Z0",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for MOVX A, @R0"
+        "description": "No description available for MOVX A, Z0"
     },
     "E7": {
         "mnemonic": "MOVX",
-        "operands": "A, @R1",
+        "operands": "A, Z1",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for MOVX A, @R1"
+        "description": "No description available for MOVX A, Z1"
     },
     "E8": {
         "mnemonic": "MOV",
@@ -2179,21 +2179,21 @@
     },
     "F2": {
         "mnemonic": "MOVX",
-        "operands": "@R0, A",
+        "operands": "Z0, A",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for MOVX @R0, A"
+        "description": "No description available for MOVX Z0, A"
     },
     "F3": {
         "mnemonic": "MOVX",
-        "operands": "@R1, A",
+        "operands": "Z1, A",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Unknown",
         "immediate_data": false,
-        "description": "No description available for MOVX @R1, A"
+        "description": "No description available for MOVX Z1, A"
     },
     "F4": {
         "mnemonic": "BCD_TO_ASCII",
@@ -2215,7 +2215,7 @@
     },
     "F6": {
         "mnemonic": "MOV",
-        "operands": "@R0, A",
+        "operands": "Z0, A",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Data Transfer",
@@ -2224,7 +2224,7 @@
     },
     "F7": {
         "mnemonic": "MOV",
-        "operands": "@R1, A",
+        "operands": "Z1, A",
         "number_of_bytes": 1,
         "cycles": 1,
         "type": "Data Transfer",
