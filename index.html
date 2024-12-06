@@ -12,97 +12,276 @@
         <h1 class="text-center mt-3">Assembly Simulator</h1>
 
         <!-- Number Base Converter -->
-        <div class="card mt-3">
-            <div class="card-header">Number Base Converter</div>
-            <div class="card-body">
-                <p class="text-muted">Convert numbers between Binary, Octal, Decimal, and Hexadecimal.</p>
-                <label for="number" class="form-label">Enter a number:</label>
-                <input type="text" id="number" class="form-control" placeholder="e.g., 25">
-                <label for="base" class="form-label mt-2">Select Base:</label>
-                <select id="base" class="form-select">
-                    <option value="2">Binary</option>
-                    <option value="8">Octal</option>
-                    <option value="10">Decimal</option>
-                    <option value="16">Hexadecimal</option>
-                </select>
-                <button class="btn btn-primary mt-3" onclick="convertNumber()">Convert</button>
-                <p class="text-muted mt-3">Example: If input is 25 (Decimal), you'll get its Binary, Octal, and Hexadecimal equivalents.</p>
-                <div class="result-group mt-3">
-                    <p><strong>Binary:</strong> <span id="resultBinary"></span></p>
-                    <p><strong>Octal:</strong> <span id="resultOctal"></span></p>
-                    <p><strong>Decimal:</strong> <span id="resultDecimal"></span></p>
-                    <p><strong>Hexadecimal:</strong> <span id="resultHexadecimal"></span></p>
-                    <p><strong>Packed BCD:</strong> <span id="packResult"></span></p>
-                    <p><strong>Unpacked BCD:</strong> <span id="unpackResult"></span></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Assembly Simulation -->
-        <div class="card mt-3">
-            <div class="card-header">Assembly Simulation</div>
-            <div class="card-body">
-                <p class="text-muted">Simulate assembly instructions and view their hexadecimal representation.</p>
-                <textarea id="assemblyInput" class="form-control" rows="5" placeholder="Enter assembly code here, e.g., MOV A, #25H\nADD A, #12H"></textarea>
-                <p class="text-muted mt-3">Example: Enter 'MOV A, #25H' to see its opcode representation and address mapping.</p>
-                <div class="d-flex mt-3">
-                    <button class="btn btn-primary me-2" onclick="simulateAssembly()">Simulate</button>
-                    <button class="btn btn-secondary" onclick="listOpcodes()">View/Hide All Instructions</button>
-                </div>
-                <div id="opcodeList" class="result-group"></div>
-                <pre id="simulationResult" class="result-group mt-3"></pre>
-            </div>
-        </div>
-
-        <!-- Execution Time Calculator -->
-        <div class="card mt-3">
-            <div class="card-header">Execution Time Calculator</div>
-            <div class="card-body">
-                <p class="text-muted">Calculate execution time of instructions based on oscillator frequency.</p>
-                <label for="oscillatorFrequency" class="form-label">Oscillator Frequency (MHz):</label>
-                <input type="number" id="oscillatorFrequency" class="form-control" placeholder="e.g., 12">
-                <textarea id="instructionInput" class="form-control mt-3" rows="5" placeholder="Enter assembly instructions, e.g., MOV A,#25H"></textarea>
-                <p class="text-muted mt-3">Example: Enter frequency as 12 MHz and instructions to calculate execution time.</p>
-                <button class="btn btn-primary mt-3" onclick="calculateExecutionTime()">Calculate</button>
-                <pre id="executionResult" class="result-group mt-3"></pre>
-            </div>
-        </div>
-
-        <!-- Address Calculator -->
-        <div class="card mt-3">
-            <div class="card-header">Address Calculator</div>
-            <div class="card-body">
-                <p class="text-muted">Perform address addition or subtraction for memory calculations.</p>
-                <label for="address1" class="form-label">Address 1 (Hex):</label>
-                <input type="text" id="address1" class="form-control" placeholder="e.g., 8000">
-                <label for="address2" class="form-label mt-2">Address 2 (Hex):</label>
-                <input type="text" id="address2" class="form-control" placeholder="e.g., 0080">
-                <label for="addressOperation" class="form-label mt-2">Operation:</label>
-                <select id="addressOperation" class="form-select">
-                    <option value="add">Add (e.g., 8000 + 0080)</option>
-                    <option value="subtract">Subtract (e.g., 8000 - 0080)</option>
-                </select>
-                <button class="btn btn-primary mt-3" onclick="addSubtractAddress()">Calculate</button>
-                <p class="text-muted mt-3">Example: Add 8000 and 0080 to calculate resulting address.</p>
-                <pre id="addressResult" class="result-group mt-3"></pre>
-            </div>
-        </div>
-
-        <!-- Instruction Simulation -->
-        <div class="card mt-3">
-            <div class="card-header">Instruction Simulation</div>
-            <div class="card-body">
-                <p class="text-muted">Simulate individual assembly instructions and view their effect on registers.</p>
-                <label for="instructionInput" class="form-label">Enter Instruction:</label>
-                <input type="text" id="instructionInput" class="form-control" placeholder="e.g., SWAP A">
-                <label for="registerInput" class="form-label mt-3">Enter Register Values (optional):</label>
-                <input type="text" id="registerInput" class="form-control" placeholder="e.g., A=56H">
-                <button class="btn btn-primary mt-3" onclick="simulateInstruction()">Simulate</button>
-                <p class="text-muted mt-3">Example: Enter 'SWAP A' with 'A=56H' to see how A is swapped.</p>
-                <pre id="instructionResult" class="result-group mt-3"></pre>
-            </div>
+<div class="card mt-3">
+    <div class="card-header">
+        Number Base Converter
+        <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="แปลงตัวเลขระหว่างฐานต่าง ๆ เช่น Binary, Octal, Decimal และ Hexadecimal. 
+                     สามารถป้อนเลขฐาน 2, 8, 10, หรือ 16 และดูผลลัพธ์ในฐานอื่น ๆ ได้.">
+            ℹ️
+        </span>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">Convert numbers between Binary, Octal, Decimal, and Hexadecimal.</p>
+        <label for="number1" class="form-label">Enter Number 1:</label>
+        <input type="text" id="number1" class="form-control" placeholder="e.g., 25">
+        <label for="number2" class="form-label mt-2">Enter Number 2 (Optional):</label>
+        <input type="text" id="number2" class="form-control" placeholder="e.g., 10">
+        <label for="base" class="form-label mt-2">Select Base:</label>
+        <select id="base" class="form-select">
+            <option value="2">Binary</option>
+            <option value="8">Octal</option>
+            <option value="10">Decimal</option>
+            <option value="16">Hexadecimal</option>
+        </select>
+        <label for="numberOperation" class="form-label mt-2">Operation:</label>
+        <select id="numberOperation" class="form-select">
+            <option value="none">None (Convert Only)</option>
+            <option value="add">Add</option>
+            <option value="subtract">Subtract</option>
+            <option value="multiply">Multiply</option>
+            <option value="divide">Divide</option>
+        </select>
+        <button class="btn btn-primary mt-3" onclick="convertAndCalculate()">Convert & Calculate</button>
+        <p class="text-muted mt-3">Example: Enter a number in Decimal, select Binary conversion, and perform operations like addition or subtraction.</p>
+        <div class="result-group mt-3">
+            <p><strong>Binary:</strong> <span id="resultBinary"></span></p>
+            <p><strong>Octal:</strong> <span id="resultOctal"></span></p>
+            <p><strong>Decimal:</strong> <span id="resultDecimal"></span></p>
+            <p><strong>Hexadecimal:</strong> <span id="resultHexadecimal"></span></p>
+            <p><strong>Packed BCD:</strong> <span id="packResult"></span></p>
+            <p><strong>Unpacked BCD:</strong> <span id="unpackResult"></span></p>
         </div>
     </div>
+</div>
+
+        <!-- Assembly Simulation -->
+<div class="card mt-3">
+    <div class="card-header">
+        Assembly Simulation
+        <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="ใช้สำหรับจำลองคำสั่ง Assembly และดูการแสดงผลในรูปแบบเลขฐาน 16 (Hexadecimal).
+                     ตัวอย่าง: ป้อนคำสั่ง 'MOV A,#25H' เพื่อดู Opcode และการ Mapping Address.
+                     เปลี่ยน @R = Z, @A = X">
+            ℹ️
+        </span>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">Simulate assembly instructions and view their hexadecimal representation.</p>
+        <textarea id="assemblyInput" class="form-control" rows="5" 
+                  placeholder="Enter assembly code here, e.g., MOV A, #25H หรือ ADD A, #12H"></textarea>
+        <p class="text-muted mt-3">Example: Enter 'MOV A, #25H' to see its opcode representation and address mapping.</p>
+        <div class="d-flex mt-3">
+            <button class="btn btn-primary me-2" onclick="simulateAssembly()">Simulate</button>
+            <button class="btn btn-secondary" onclick="listOpcodes()">View/Hide All Instructions</button>
+        </div>
+        <div id="opcodeList" class="result-group"></div>
+        <pre id="simulationResult" class="result-group mt-3"></pre>
+    </div>
+</div>
+
+        <!-- Execution Time Calculator -->
+<div class="card mt-3">
+    <div class="card-header">
+        Execution Time Calculator
+        <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="ใช้คำนวณเวลาการดำเนินการของคำสั่ง Assembly ตามความถี่ของ Oscillator (MHz).
+                     ตัวอย่าง: ป้อนคำสั่ง 'MOV A,#25H' และระบุความถี่ 12 MHz เพื่อดูเวลา Execution Time.">
+            ℹ️
+        </span>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">Calculate execution time of instructions based on oscillator frequency.</p>
+        <label for="oscillatorFrequency" class="form-label">Oscillator Frequency (MHz):</label>
+        <input type="number" id="oscillatorFrequency" class="form-control" placeholder="e.g., 12">
+        <textarea id="instructionInput" class="form-control mt-3" rows="5" 
+                  placeholder="Enter assembly instructions, e.g., MOV A,#25H"></textarea>
+        <p class="text-muted mt-3">Example: Enter frequency as 12 MHz and instructions to calculate execution time.</p>
+        <button class="btn btn-primary mt-3" onclick="calculateExecutionTime()">Calculate</button>
+        <pre id="executionResult" class="result-group mt-3"></pre>
+    </div>
+</div>
+
+        <!-- Address Calculator -->
+<div class="card mt-3">
+    <div class="card-header">
+        Address Calculator
+        <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="เครื่องคำนวณ Address ใช้สำหรับการบวกหรือลบค่าที่อยู่หน่วยความจำ (Memory Address). 
+                     ตัวอย่าง: ป้อน 8000 และ 0080 เพื่อคำนวณผลลัพธ์จากการบวกหรือการลบ">
+            ℹ️
+        </span>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">Perform address addition or subtraction for memory calculations.</p>
+        <label for="address1" class="form-label">Address 1 (Hex):</label>
+        <input type="text" id="address1" class="form-control" placeholder="e.g., 8000">
+        <label for="address2" class="form-label mt-2">Address 2 (Hex):</label>
+        <input type="text" id="address2" class="form-control" placeholder="e.g., 0080">
+        <label for="addressOperation" class="form-label mt-2">Operation:</label>
+        <select id="addressOperation" class="form-select">
+            <option value="add">Add (e.g., 8000 + 0080)</option>
+            <option value="subtract">Subtract (e.g., 8000 - 0080)</option>
+        </select>
+        <button class="btn btn-primary mt-3" onclick="addSubtractAddress()">Calculate</button>
+        <p class="text-muted mt-3">Example: Add 8000 and 0080 to calculate resulting address.</p>
+        <pre id="addressResult" class="result-group mt-3"></pre>
+    </div>
+</div>
+        
+        <!-- Instruction Simulation -->
+<div class="card mt-3">
+    <div class="card-header">
+        Instruction Simulation
+        <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="ส่วนจำลองคำสั่ง Assembly ใช้เพื่อทดสอบผลกระทบของคำสั่งต่อรีจิสเตอร์ (Register).
+                     ตัวอย่าง: ป้อน SWAP A เพื่อสลับ Nibble (4 บิต) ใน Accumulator">
+            ℹ️
+        </span>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">Simulate individual assembly instructions and view their effect on registers.</p>
+        
+        <!-- Input for Assembly Instructions -->
+        <label for="instructionInputField" class="form-label">Enter Instruction:</label>
+        <input type="text" id="instructionInputField" class="form-control" placeholder="e.g., SWAP A">
+        
+        <!-- Optional Register Values -->
+        <label for="registerInputField" class="form-label mt-3">Enter Register Values (optional):</label>
+        <input type="text" id="registerInputField" class="form-control" placeholder="e.g., A=56H">
+        
+        <!-- Buttons for Simulation and Instruction List -->
+        <div class="d-flex mt-3">
+            <button class="btn btn-primary me-2" onclick="simulateInstruction()">Simulate</button>
+            <button class="btn btn-secondary" onclick="toggleInstructionList()">View Instructions</button>
+        </div>
+        
+        <!-- Instruction List -->
+        <div id="instructionList" class="result-group" style="display: none;">
+            <!-- List of Instructions -->
+            <strong>Supported Instructions:</strong>
+            <ul>
+                <li>ANL A, #data</li>
+                <li>ORL A, #data</li>
+                <li>XRL A, #data</li>
+                <li>SWAP A</li>
+                <li>CJNE A, #data, target</li>
+                <li>SETB bit</li>
+                <li>CLR A</li>
+            </ul>
+        </div>
+        
+        <!-- Simulation Results -->
+        <pre id="instructionResult" class="result-group mt-3"></pre>
+    </div>
+</div>
+
+    <!-- Instruction Parsing and Execution -->
+<div class="card mt-3">
+    <div class="card-header">
+        Instruction Parsing and Execution
+        <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="ส่วนจำลองการวิเคราะห์และดำเนินการคำสั่ง Assembly. 
+                     ตัวอย่าง: 'ANL A, #0Fh' หรือ 'CJNE A, #20H, target' เพื่อดูผลการประมวลผล">
+            ℹ️
+        </span>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">Enter assembly instructions to simulate parsing and execution.</p>
+        <textarea id="instructionInput" class="form-control" rows="5" placeholder="e.g., ANL A, #0Fh\nCJNE A, #20H, target"></textarea>
+        <button class="btn btn-primary mt-3" onclick="parseAndExecuteInstructions()">Parse & Execute</button>
+        <pre id="executionResult" class="result-group mt-3"></pre>
+    </div>
+</div>
+
+<!-- Dynamic Register Input -->
+<div class="card mt-3">
+    <div class="card-header">
+        Dynamic Register Input
+        <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="กำหนดค่ารีจิสเตอร์ที่กำหนดเองสำหรับการจำลอง. 
+                     ตัวอย่าง: ป้อน 'A=56H, B=30H, R1=10H' เพื่อดูผลกระทบของคำสั่ง Assembly">
+            ℹ️
+        </span>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">Define custom registers and values for simulation.</p>
+        <textarea id="registerInput" class="form-control" rows="3" placeholder="e.g., A=56H, B=30H, R1=10H"></textarea>
+        <button class="btn btn-secondary mt-3" onclick="processRegisters()">Process Registers</button>
+        <pre id="registerResult" class="result-group mt-3"></pre>
+    </div>
+</div>
+
+<!-- Packed and ASCII Conversion -->
+<div class="card mt-3">
+    <div class="card-header">
+        Packed BCD and ASCII Conversion
+        <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="แปลงข้อมูลระหว่าง Packed BCD, ASCII และ Binary. 
+                     ตัวอย่าง: เลือก 'Packed BCD to ASCII' เพื่อดูผลลัพธ์ในรูปแบบ ASCII">
+            ℹ️
+        </span>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">Convert between Packed BCD, ASCII, and Binary.</p>
+        <input type="text" id="conversionInput" class="form-control" placeholder="Enter a value">
+        <label for="conversionType" class="form-label mt-2">Conversion Type:</label>
+        <select id="conversionType" class="form-select">
+            <option value="packedToAscii">Packed BCD to ASCII</option>
+            <option value="asciiToPacked">ASCII to Packed BCD</option>
+            <option value="binaryToDecimal">Binary to Decimal</option>
+        </select>
+        <button class="btn btn-primary mt-3" onclick="convertData()">Convert</button>
+        <pre id="conversionResult" class="result-group mt-3"></pre>
+    </div>
+</div>
+
+<!-- Flexible Memory Handling -->
+<div class="card mt-3">
+    <div class="card-header">
+        Memory Handling
+        <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="จัดการหน่วยความจำ เช่น การเริ่มต้น, อ่าน, และเขียนข้อมูล. 
+                     ตัวอย่าง: ป้อน 'ORG 300H' และ 'MYDATA DB 76H' เพื่อดูการจัดเก็บข้อมูล">
+            ℹ️
+        </span>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">Initialize, read, or write memory data.</p>
+        <label for="memoryAddress" class="form-label">Memory Address:</label>
+        <input type="text" id="memoryAddress" class="form-control" placeholder="e.g., ORG 300H">
+        <label for="memoryData" class="form-label mt-2">Data (Optional):</label>
+        <input type="text" id="memoryData" class="form-control" placeholder="e.g., MYDATA DB 76H">
+        <div class="d-flex mt-3">
+            <button class="btn btn-success me-2" onclick="initializeMemory()">Initialize</button>
+            <button class="btn btn-warning me-2" onclick="readMemory()">Read</button>
+            <button class="btn btn-danger" onclick="writeMemory()">Write</button>
+        </div>
+        <pre id="memoryResult" class="result-group mt-3"></pre>
+    </div>
+</div>
+
+        <!-- Rotational and Swap Operations -->
+<div class="card mt-3">
+    <div class="card-header">
+        Rotational and Swap Operations
+        <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="ดำเนินการหมุนหรือสลับบิตในข้อมูล เช่น SWAP A, RR A, RL A. 
+                     ตัวอย่าง: 'SWAP A' จะสลับ nibble สูงกับ nibble ต่ำใน A.">
+            ℹ️
+        </span>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">Perform bit-level operations like SWAP A, RR A, or RL A.</p>
+        <input type="text" id="rotationInput" class="form-control" placeholder="e.g., SWAP A">
+        <button class="btn btn-primary mt-3" onclick="performRotation()">Perform</button>
+        <pre id="rotationResult" class="result-group mt-3"></pre>
+    </div>
+</div>
+        
+    </div>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
